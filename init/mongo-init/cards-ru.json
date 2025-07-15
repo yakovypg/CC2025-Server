@@ -1,0 +1,12 @@
+[
+  { "frontText": "H", "backText": "Водород" },
+  { "frontText": "He", "backText": "Гелий" },
+  { "frontText": "Li", "backText": "Литий" },
+  { "frontText": "Be", "backText": "Бериллий" },
+  { "frontText": "B", "backText": "Бор" },
+  { "frontText": "C", "backText": "Углерод" },
+  { "frontText": "N", "backText": "Азот" },
+  { "frontText": "O", "backText": "Кислород" },
+  { "frontText": "F", "backText": "Фтор" },
+  { "frontText": "Ne", "backText": "Неон" }
+]

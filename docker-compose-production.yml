@@ -32,6 +32,7 @@ services:
       - 27017:27017
     volumes:
       - mongo-data:/data/db
+      - ./init/mongo-init:/docker-entrypoint-initdb.d:ro
     deploy:
       resources:
         limits:
