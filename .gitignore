@@ -1,0 +1,7 @@
+dist
+node_modules
+
+certificates/*.key
+certificates/*.cert
+
+.env
