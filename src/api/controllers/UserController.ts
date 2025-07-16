@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 
 import {
-  safeInvoke,
   parseAnswerArray,
   parseNumberArray,
   parseStatistics,
@@ -41,10 +40,8 @@ export class UserController {
       return;
     }
 
-    await safeInvoke(res, async () => {
-      const user = await addUser(vkId, this.repository);
-      answerSuccessCreated(res, user);
-    });
+    const user = await addUser(vkId, this.repository);
+    answerSuccessCreated(res, user);
   };
 
   public getUser = async (req: Request, res: Response): Promise<void> => {
@@ -55,10 +52,8 @@ export class UserController {
       return;
     }
 
-    await safeInvoke(res, async () => {
-      const user = await getUser(vkId, this.repository);
-      answerSuccessOk(res, user);
-    });
+    const user = await getUser(vkId, this.repository);
+    answerSuccessOk(res, user);
   };
 
   public updateStatistics = async (req: Request, res: Response): Promise<void> => {
@@ -70,10 +65,8 @@ export class UserController {
       return;
     }
 
-    await safeInvoke(res, async () => {
-      const updatedStatistics = await updateUserStatistics(vkId, statistics, this.repository);
-      answerSuccessOk(res, updatedStatistics);
-    });
+    const updatedStatistics = await updateUserStatistics(vkId, statistics, this.repository);
+    answerSuccessOk(res, updatedStatistics);
   };
 
   public getStatistics = async (req: Request, res: Response): Promise<void> => {
@@ -84,10 +77,8 @@ export class UserController {
       return;
     }
 
-    await safeInvoke(res, async () => {
-      const statistics = await getUserStatistics(vkId, this.repository);
-      answerSuccessOk(res, statistics);
-    });
+    const statistics = await getUserStatistics(vkId, this.repository);
+    answerSuccessOk(res, statistics);
   };
 
   public updateAchievements = async (req: Request, res: Response): Promise<void> => {
@@ -99,10 +90,8 @@ export class UserController {
       return;
     }
 
-    await safeInvoke(res, async () => {
-      const updatedAchievements = await updateUserAchievements(vkId, achievements, this.repository);
-      answerSuccessOk(res, updatedAchievements);
-    });
+    const updatedAchievements = await updateUserAchievements(vkId, achievements, this.repository);
+    answerSuccessOk(res, updatedAchievements);
   };
 
   public getAchievements = async (req: Request, res: Response): Promise<void> => {
@@ -113,10 +102,8 @@ export class UserController {
       return;
     }
 
-    await safeInvoke(res, async () => {
-      const achievements = await getUserAchievements(vkId, this.repository);
-      answerSuccessOk(res, achievements);
-    });
+    const achievements = await getUserAchievements(vkId, this.repository);
+    answerSuccessOk(res, achievements);
   };
 
   public addMistakes = async (req: Request, res: Response): Promise<void> => {
@@ -128,10 +115,8 @@ export class UserController {
       return;
     }
 
-    await safeInvoke(res, async () => {
-      await addUserMistakes(vkId, mistakeIds, this.repository);
-      answerSuccessOk(res);
-    });
+    await addUserMistakes(vkId, mistakeIds, this.repository);
+    answerSuccessOk(res);
   };
 
   public deleteMistakes = async (req: Request, res: Response): Promise<void> => {
@@ -143,10 +128,8 @@ export class UserController {
       return;
     }
 
-    await safeInvoke(res, async () => {
-      await deleteUserMistakes(vkId, mistakeIds, this.repository);
-      answerSuccessOk(res);
-    });
+    await deleteUserMistakes(vkId, mistakeIds, this.repository);
+    answerSuccessOk(res);
   };
 
   public getMistakes = async (req: Request, res: Response): Promise<void> => {
@@ -157,10 +140,8 @@ export class UserController {
       return;
     }
 
-    await safeInvoke(res, async () => {
-      const mistakeIds = await getUserMistakes(vkId, this.repository);
-      answerSuccessOk(res, mistakeIds);
-    });
+    const mistakeIds = await getUserMistakes(vkId, this.repository);
+    answerSuccessOk(res, mistakeIds);
   };
 
   public addAnswers = async (req: Request, res: Response): Promise<void> => {
@@ -172,9 +153,7 @@ export class UserController {
       return;
     }
 
-    await safeInvoke(res, async () => {
-      const user = await addUserAnswers(vkId, answers, this.repository);
-      answerSuccessOk(res, user);
-    });
+    const user = await addUserAnswers(vkId, answers, this.repository);
+    answerSuccessOk(res, user);
   };
 }

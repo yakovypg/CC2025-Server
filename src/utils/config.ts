@@ -1,12 +1,11 @@
 import fs from "fs";
-import express, { Express, Request, Response, NextFunction } from "express";
-
-import { StatusCode } from "status-code-enum";
+import express, { Express } from "express";
 
 import userRoutes from "../api/routes/user";
 import cardRoutes from "../api/routes/card";
 
 import { HttpsConfig, ServerConfig } from "../configuration";
+import { errorHandler } from "../api/middlewares";
 
 export const loadHttpsConfig = (): HttpsConfig | null => {
   const httpsKeyPath = process.env.HTTPS_KEY_PATH;
@@ -48,19 +47,5 @@ export const configureApp = (app: Express): void => {
   app.use("/api/user", userRoutes);
   app.use("/api/card", cardRoutes);
 
-  app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
-    console.error(err);
-
-    const status = err.statusCode || StatusCode.ServerErrorInternal;
-    const message = err.message || "Internal Server Error";
-    const stack = err.stack;
-
-    res.status(StatusCode.ServerErrorInternal).json({
-      error: {
-        status: status,
-        message: message,
-        stack: stack
-      }
-    });
-  });
+  app.use(errorHandler);
 };
