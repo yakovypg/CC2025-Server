@@ -1,17 +1,18 @@
-import { Response } from "express";
-import { StatusCode } from "status-code-enum";
-
 import { UserRepository } from "../../infrastructure/data/repositories";
+import { Achievements } from "../../models";
+import { UserNotFoundError } from "../errors";
 
-const getUserAchievements = async (res: Response, userVkId: number, repository: UserRepository) => {
-  const achievement = await repository.findAchievements(userVkId);
+const getUserAchievements = async (
+  userVkId: number,
+  repository: UserRepository
+): Promise<Achievements> => {
+  const achievements = await repository.findAchievements(userVkId);
 
-  if (!achievement) {
-    res.status(StatusCode.ClientErrorNotFound).json("User achievements not found");
-    return;
+  if (!achievements) {
+    throw new UserNotFoundError();
   }
 
-  res.status(StatusCode.SuccessOK).json(achievement);
+  return achievements;
 };
 
 export default getUserAchievements;

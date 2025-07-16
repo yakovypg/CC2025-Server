@@ -1,22 +1,16 @@
-import { Response } from "express";
-import { StatusCode } from "status-code-enum";
-
 import { UserRepository } from "../../infrastructure/data/repositories";
+import { UserNotFoundError } from "../errors";
 
 const addUserMistakes = async (
-  res: Response,
   userVkId: number,
-  mistakeIds: string[],
+  mistakeIds: number[],
   repository: UserRepository
-) => {
-  const ok = await repository.addMistakes(userVkId, mistakeIds);
+): Promise<void> => {
+  const mistakesAdded = await repository.addMistakes(userVkId, mistakeIds);
 
-  if (!ok) {
-    res.status(StatusCode.ClientErrorNotFound).json("User not found");
-    return;
+  if (!mistakesAdded) {
+    throw new UserNotFoundError();
   }
-
-  //res.status(StatusCode.SuccessCreated).json("OK");
 };
 
 export default addUserMistakes;

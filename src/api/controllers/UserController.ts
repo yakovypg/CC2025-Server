@@ -2,12 +2,13 @@ import { Request, Response } from "express";
 
 import {
   safeInvoke,
-  getNumberIdFromBody,
-  getNumberIdFromParams,
-  getArrayFromBody,
-  getAnswerArrayFromBody,
-  getStatisticsFromBody,
-  getAchievementsFromBody
+  parseAnswerArray,
+  parseNumberArray,
+  parseStatistics,
+  parseAchievements,
+  answerSuccessCreated,
+  answerBadRequest,
+  answerSuccessOk
 } from "../../utils";
 
 import {
@@ -33,127 +34,147 @@ export class UserController {
   }
 
   public addUser = async (req: Request, res: Response): Promise<void> => {
-    const vkId = getNumberIdFromBody(req, res);
+    const vkId = Number(req.body.id);
 
-    if (!vkId) {
+    if (!Number.isInteger(vkId)) {
+      answerBadRequest(res);
       return;
     }
 
     await safeInvoke(res, async () => {
-      await addUser(res, vkId, this.repository);
+      const user = await addUser(vkId, this.repository);
+      answerSuccessCreated(res, user);
     });
   };
 
   public getUser = async (req: Request, res: Response): Promise<void> => {
-    const vkId = getNumberIdFromParams(req, res);
+    const vkId = Number(req.params.id);
 
-    if (!vkId) {
+    if (!Number.isInteger(vkId)) {
+      answerBadRequest(res);
       return;
     }
 
     await safeInvoke(res, async () => {
-      await getUser(res, vkId, this.repository);
+      const user = await getUser(vkId, this.repository);
+      answerSuccessOk(res, user);
     });
   };
 
   public updateStatistics = async (req: Request, res: Response): Promise<void> => {
-    const vkId = getNumberIdFromParams(req, res);
-    const statistics = getStatisticsFromBody(req, res);
+    const vkId = Number(req.params.id);
+    const statistics = parseStatistics(req.body);
 
-    if (!vkId || !statistics) {
+    if (!Number.isInteger(vkId) || !statistics) {
+      answerBadRequest(res);
       return;
     }
 
     await safeInvoke(res, async () => {
-      await updateUserStatistics(res, vkId, statistics, this.repository);
+      const updatedStatistics = await updateUserStatistics(vkId, statistics, this.repository);
+      answerSuccessOk(res, updatedStatistics);
     });
   };
 
   public getStatistics = async (req: Request, res: Response): Promise<void> => {
-    const vkId = getNumberIdFromParams(req, res);
+    const vkId = Number(req.params.id);
 
-    if (!vkId) {
+    if (!Number.isInteger(vkId)) {
+      answerBadRequest(res);
       return;
     }
 
     await safeInvoke(res, async () => {
-      await getUserStatistics(res, vkId, this.repository);
+      const statistics = await getUserStatistics(vkId, this.repository);
+      answerSuccessOk(res, statistics);
     });
   };
 
   public updateAchievements = async (req: Request, res: Response): Promise<void> => {
-    const vkId = getNumberIdFromParams(req, res);
-    const achievements = getAchievementsFromBody(req, res);
+    const vkId = Number(req.params.id);
+    const achievements = parseAchievements(req.body);
 
-    if (!vkId || !achievements) {
+    if (!Number.isInteger(vkId) || !achievements) {
+      answerBadRequest(res);
       return;
     }
 
     await safeInvoke(res, async () => {
-      await updateUserAchievements(res, vkId, achievements, this.repository);
+      const updatedAchievements = await updateUserAchievements(vkId, achievements, this.repository);
+      answerSuccessOk(res, updatedAchievements);
     });
   };
 
   public getAchievements = async (req: Request, res: Response): Promise<void> => {
-    const vkId = getNumberIdFromParams(req, res);
+    const vkId = Number(req.params.id);
 
-    if (!vkId) {
+    if (!Number.isInteger(vkId)) {
+      answerBadRequest(res);
       return;
     }
 
     await safeInvoke(res, async () => {
-      await getUserAchievements(res, vkId, this.repository);
+      const achievements = await getUserAchievements(vkId, this.repository);
+      answerSuccessOk(res, achievements);
     });
   };
 
   public addMistakes = async (req: Request, res: Response): Promise<void> => {
-    const vkId = getNumberIdFromParams(req, res);
-    const mistakeIds = getArrayFromBody(req, res);
+    const vkId = Number(req.params.id);
+    const mistakeIds = parseNumberArray(req.body);
 
-    if (!vkId || !mistakeIds) {
+    if (!Number.isInteger(vkId) || !mistakeIds) {
+      answerBadRequest(res);
       return;
     }
 
     await safeInvoke(res, async () => {
-      await addUserMistakes(res, vkId, mistakeIds, this.repository);
+      await addUserMistakes(vkId, mistakeIds, this.repository);
+      answerSuccessOk(res);
     });
   };
 
   public deleteMistakes = async (req: Request, res: Response): Promise<void> => {
-    const vkId = getNumberIdFromParams(req, res);
-    const mistakeIds = getArrayFromBody(req, res);
+    const vkId = Number(req.params.id);
+    const mistakeIds = parseNumberArray(req.body);
 
-    if (!vkId || !mistakeIds) {
+    if (!Number.isInteger(vkId) || !mistakeIds) {
+      answerBadRequest(res);
       return;
     }
 
     await safeInvoke(res, async () => {
-      deleteUserMistakes(res, vkId, mistakeIds, this.repository);
+      await deleteUserMistakes(vkId, mistakeIds, this.repository);
+      answerSuccessOk(res);
     });
   };
 
   public getMistakes = async (req: Request, res: Response): Promise<void> => {
-    const vkId = getNumberIdFromParams(req, res);
+    const vkId = Number(req.params.id);
 
-    if (!vkId) {
+    if (!Number.isInteger(vkId)) {
+      answerBadRequest(res);
       return;
     }
 
     await safeInvoke(res, async () => {
-      getUserMistakes(res, vkId, this.repository);
+      const mistakeIds = await getUserMistakes(vkId, this.repository);
+      answerSuccessOk(res, mistakeIds);
     });
   };
 
   public addAnswers = async (req: Request, res: Response): Promise<void> => {
-    const vkId = getNumberIdFromParams(req, res);
-    const answers = getAnswerArrayFromBody(req, res);
+    const vkId = Number(req.params.id);
+    const answers = parseAnswerArray(req.body);
 
-    if (!vkId || !answers) {
+    if (!Number.isInteger(vkId) || !answers) {
+      answerBadRequest(res);
       return;
     }
 
     await safeInvoke(res, async () => {
-      await addUserAnswers(res, vkId, answers, this.repository);
+      const user = await addUserAnswers(vkId, answers, this.repository);
+      answerSuccessOk(res, user);
     });
   };
 }

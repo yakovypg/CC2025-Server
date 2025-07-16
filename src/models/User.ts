@@ -13,27 +13,34 @@ export interface User {
   vkId: number;
   statistics: Statistics;
   achievements: Achievements;
-  mistakeIds: string[];
+  mistakeIds: number[];
   lastResultDate: Date;
   registrationDate: Date;
+
+  save(...args: any[]): Promise<this>;
 }
 
 export interface UserDocument extends User, Document {
-  vkId: number;
   statistics: StatisticsDocument;
   achievements: AchievementsDocument;
-  mistakeIds: string[];
-  lastResultDate: Date;
-  registrationDate: Date;
+
+  save(...args: any[]): Promise<this>;
 }
 
-export const UserSchema: Schema = new Schema({
-  vkId: { type: Number, required: true, unique: true },
-  statistics: { type: StatisticsSchema, required: true },
-  achievements: { type: AchievementsSchema, required: true },
-  mistakeIds: { type: [String], required: true },
-  lastResultDate: { type: Date, required: true },
-  registrationDate: { type: Date, required: true }
-});
+export const UserSchema: Schema = new Schema(
+  {
+    vkId: { type: Number, required: true, unique: true },
+    statistics: { type: StatisticsSchema, required: true },
+    achievements: { type: AchievementsSchema, required: true },
+    mistakeIds: { type: [Number], required: true },
+    lastResultDate: { type: Date, required: true },
+    registrationDate: { type: Date, required: true }
+  }
+);
 
-export const UserModel: Model<UserDocument> = mongoose.model<UserDocument>("User", UserSchema);
+export const UserModelName: string = "User";
+
+export const UserModel: Model<UserDocument> = mongoose.model<UserDocument>(
+  UserModelName,
+  UserSchema
+);

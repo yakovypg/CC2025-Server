@@ -1,17 +1,15 @@
-import { Response } from "express";
-import { StatusCode } from "status-code-enum";
-
 import { UserRepository } from "../../infrastructure/data/repositories";
+import { User } from "../../models";
+import { UserNotFoundError } from "../errors";
 
-const getUser = async (res: Response, userVkId: number, repository: UserRepository) => {
+const getUser = async (userVkId: number, repository: UserRepository): Promise<User> => {
   const user = await repository.findByVkId(userVkId);
 
   if (!user) {
-    res.status(StatusCode.ClientErrorNotFound).json("User not found");
-    return;
+    throw new UserNotFoundError();
   }
 
-  res.status(StatusCode.SuccessOK).json(user);
+  return user;
 };
 
 export default getUser;

@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { StatusCode } from "status-code-enum";
 
 import { CardRepository } from "../../infrastructure/data/repositories";
-import { safeInvoke, randomReduceArray } from "../../utils";
+import { safeInvoke, parseNumberArray, answerSuccessOk } from "../../utils";
+import { getCards } from "../../infrastructure/commands/";
 
 export class CardController {
   private repository: CardRepository;
@@ -13,15 +13,11 @@ export class CardController {
 
   public getCards = async (req: Request, res: Response): Promise<void> => {
     const cardsCount = Number(req.query.cardsCount);
+    const cardsIds = parseNumberArray(req.query.cardIds);
 
     await safeInvoke(res, async () => {
-      const cards = await this.repository.findAll();
-
-      if (!Number.isNaN(cardsCount)) {
-        randomReduceArray(cards, cardsCount);
-      }
-
-      res.status(StatusCode.SuccessOK).json(cards);
+      const cards = await getCards(this.repository, cardsIds, cardsCount);
+      answerSuccessOk(res, cards);
     });
   };
 }

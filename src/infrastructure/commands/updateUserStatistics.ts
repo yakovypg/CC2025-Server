@@ -1,23 +1,19 @@
-import { Response } from "express";
-import { StatusCode } from "status-code-enum";
-
 import { Statistics } from "../../models";
 import { UserRepository } from "../../infrastructure/data/repositories";
+import { UserNotFoundError } from "../errors";
 
 const updateUserStatistics = async (
-  res: Response,
   userVkId: number,
   statistics: Partial<Statistics>,
   repository: UserRepository
-) => {
+): Promise<Statistics> => {
   const user = await repository.updateStatistics(userVkId, statistics);
 
   if (!user) {
-    res.status(StatusCode.ClientErrorNotFound).json("User statistics not found");
-    return;
+    throw new UserNotFoundError();
   }
 
-  res.status(StatusCode.SuccessOK).json(user.statistics);
+  return user.statistics;
 };
 
 export default updateUserStatistics;

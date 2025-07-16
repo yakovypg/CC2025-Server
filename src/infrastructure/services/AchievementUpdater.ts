@@ -1,15 +1,15 @@
 import moment from "moment";
 
-import { UserDocument, Achievement } from "../../models";
+import { User, Achievement } from "../../models";
 import { NotSupportedError } from "../errors";
 
 export class AchievementUpdater {
   private static readonly maxLevel: number = 10;
   private static readonly nextLevelMultiplyingFactor: number = 2;
 
-  private user: UserDocument;
+  private user: User;
 
-  constructor(user: UserDocument) {
+  constructor(user: User) {
     this.user = user;
   }
 
@@ -77,7 +77,7 @@ export class AchievementUpdater {
     this.updateVeteran();
   };
 
-  public saveChanges = async (): Promise<UserDocument> => {
+  public saveChanges = async (): Promise<User> => {
     return this.user.save();
   };
 }

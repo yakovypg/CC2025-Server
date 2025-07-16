@@ -1,12 +1,12 @@
 [
-  { "frontText": "H", "backText": "Водород" },
-  { "frontText": "He", "backText": "Гелий" },
-  { "frontText": "Li", "backText": "Литий" },
-  { "frontText": "Be", "backText": "Бериллий" },
-  { "frontText": "B", "backText": "Бор" },
-  { "frontText": "C", "backText": "Углерод" },
-  { "frontText": "N", "backText": "Азот" },
-  { "frontText": "O", "backText": "Кислород" },
-  { "frontText": "F", "backText": "Фтор" },
-  { "frontText": "Ne", "backText": "Неон" }
+  { "id": 1, "frontText": "H", "backText": "Водород" },
+  { "id": 2, "frontText": "He", "backText": "Гелий" },
+  { "id": 3, "frontText": "Li", "backText": "Литий" },
+  { "id": 4, "frontText": "Be", "backText": "Бериллий" },
+  { "id": 5, "frontText": "B", "backText": "Бор" },
+  { "id": 6, "frontText": "C", "backText": "Углерод" },
+  { "id": 7, "frontText": "N", "backText": "Азот" },
+  { "id": 8, "frontText": "O", "backText": "Кислород" },
+  { "id": 9, "frontText": "F", "backText": "Фтор" },
+  { "id": 10, "frontText": "Ne", "backText": "Неон" }
 ]

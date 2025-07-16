@@ -1,19 +1,20 @@
-import { Response } from "express";
-import { StatusCode } from "status-code-enum";
-
-import { checkUserExists } from "./"
 import { UserRepository } from "../../infrastructure/data/repositories";
+import { UserExistsError } from "../errors";
+import { User } from "../../models";
 
-const addUser = async (res: Response, userVkId: number, repository: UserRepository) => {
+import { checkUserExists } from "./";
+
+const addUser = async (
+  userVkId: number,
+  repository: UserRepository
+): Promise<User> => {
   const userExists = await checkUserExists(userVkId, repository);
 
   if (userExists) {
-    res.status(StatusCode.ClientErrorBadRequest).json("Cannot create user");
-    return;
+    throw new UserExistsError();
   }
 
-  const user = await repository.addUser(userVkId);
-  res.status(StatusCode.SuccessCreated).json(user);
+  return await repository.addUser(userVkId);
 };
 
 export default addUser;

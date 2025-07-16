@@ -1,6 +1,3 @@
-import { StatusCode } from "status-code-enum";
-import { Request, Response } from "express";
-
 import {
   AchievementImpl,
   Achievements,
@@ -10,48 +7,12 @@ import {
   StatisticsImpl
 } from "../models";
 
-export const getNumberIdFromObject = (idData: any, res: Response): number | null => {
-  const id = Number(idData);
-
-  if (Number.isNaN(id)) {
-    res.status(StatusCode.ClientErrorBadRequest).json("Invalid id");
-    return null;
-  }
-
-  return id;
+export const parseArray = (data: any): any[] | null => {
+  return Array.isArray(data) ? data : null;
 };
 
-export const getIdFromBody = (req: Request): string => {
-  return req.body.id;
-};
-
-export const getIdFromParams = (req: Request): string => {
-  return req.params.id;
-};
-
-export const getNumberIdFromBody = (req: Request, res: Response): number | null => {
-  const idData = getIdFromBody(req);
-  return getNumberIdFromObject(idData, res);
-};
-
-export const getNumberIdFromParams = (req: Request, res: Response): number | null => {
-  const idData = getIdFromParams(req);
-  return getNumberIdFromObject(idData, res);
-};
-
-export const getArrayFromBody = (req: Request, res: Response): any[] | null => {
-  const arr = req.body;
-
-  if (!Array.isArray(arr)) {
-    res.status(StatusCode.ClientErrorBadRequest).json("Invalid array");
-    return null;
-  }
-
-  return arr;
-};
-
-export const getNumberArrayFromBody = (req: Request, res: Response): number[] | null => {
-  const arr = getArrayFromBody(req, res);
+export const parseNumberArray = (data: any): number[] | null => {
+  const arr = parseArray(data);
 
   if (!arr) {
     return null;
@@ -60,16 +21,11 @@ export const getNumberArrayFromBody = (req: Request, res: Response): number[] | 
   const mappedArr = arr.map((t) => Number(t));
   const isMappedArrCorrect = mappedArr.every((t) => !Number.isNaN(t));
 
-  if (!isMappedArrCorrect) {
-    res.status(StatusCode.ClientErrorBadRequest).json("Invalid array");
-    return null;
-  }
-
-  return mappedArr;
+  return isMappedArrCorrect ? mappedArr : null;
 };
 
-export const getAnswerArrayFromBody = (req: Request, res: Response): Answer[] | null => {
-  const arr = getArrayFromBody(req, res);
+export const parseAnswerArray = (data: any): Answer[] | null => {
+  const arr = parseArray(data);
 
   if (!arr) {
     return null;
@@ -78,40 +34,37 @@ export const getAnswerArrayFromBody = (req: Request, res: Response): Answer[] | 
   const isArrCorrect = arr.every((t) => t.cardId !== undefined && t.isCorrect !== undefined);
 
   if (!isArrCorrect) {
-    res.status(StatusCode.ClientErrorBadRequest).json("Invalid array");
     return null;
   }
 
   const mappedArr: Answer[] = arr.map((t) => ({
-    cardId: String(t.cardId),
+    cardId: Number(t.cardId),
     isCorrect: Boolean(Number(t.isCorrect))
   }));
 
-  return mappedArr;
+  const isMappedArrCorrect = mappedArr.every((t) => !Number.isNaN(t.cardId));
+
+  return isMappedArrCorrect ? mappedArr : null;
 };
 
-export const getStatisticsFromBody = (req: Request, res: Response): Partial<Statistics> | null => {
+export const parseStatistics = (data: any): Partial<Statistics> | null => {
   const allowedKeys = Object.keys(new StatisticsImpl());
-  const bodyKeys = Object.keys(req.body);
+  const bodyKeys = Object.keys(data);
 
   const isBodyCorrect = bodyKeys.length > 0 && bodyKeys.every((key) => allowedKeys.includes(key));
 
   if (!isBodyCorrect) {
-    res.status(StatusCode.ClientErrorBadRequest).json("Invalid statistics");
     return null;
   }
 
-  return req.body;
+  return data;
 };
 
-export const getAchievementsFromBody = (
-  req: Request,
-  res: Response
-): Partial<Achievements> | null => {
+export const parseAchievements = (data: any): Partial<Achievements> | null => {
   const allowedKeys = Object.keys(new AchievementsImpl());
   const allowedAchievementKeys = Object.keys(new AchievementImpl());
 
-  const body = req.body;
+  const body = data;
   const bodyKeys = Object.keys(body);
 
   const isBodyCorrect =
@@ -123,9 +76,8 @@ export const getAchievementsFromBody = (
     );
 
   if (!isBodyCorrect) {
-    res.status(StatusCode.ClientErrorBadRequest).json("Invalid achievements");
     return null;
   }
 
-  return req.body;
+  return data;
 };

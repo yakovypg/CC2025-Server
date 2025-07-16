@@ -1,4 +1,4 @@
 export interface Answer {
-  cardId: string;
+  cardId: number;
   isCorrect: boolean;
 }

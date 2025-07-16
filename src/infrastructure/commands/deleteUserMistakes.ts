@@ -1,22 +1,16 @@
-import { Response } from "express";
-import { StatusCode } from "status-code-enum";
-
 import { UserRepository } from "../../infrastructure/data/repositories";
+import { UserNotFoundError } from "../errors";
 
 const deleteUserMistakes = async (
-  res: Response,
   userVkId: number,
-  mistakeIds: string[],
+  mistakeIds: number[],
   repository: UserRepository
-) => {
-  const ok = await repository.deleteMistakes(userVkId, mistakeIds);
+): Promise<void> => {
+  const mistakesDeleted = await repository.deleteMistakes(userVkId, mistakeIds);
 
-  if (!ok) {
-    res.status(StatusCode.ClientErrorNotFound).json("User not found");
-    return;
+  if (!mistakesDeleted) {
+    throw new UserNotFoundError();
   }
-
-  res.status(StatusCode.SuccessOK).json("OK");
 };
 
 export default deleteUserMistakes;

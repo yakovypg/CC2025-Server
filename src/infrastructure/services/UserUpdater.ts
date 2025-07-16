@@ -1,11 +1,11 @@
 import { AchievementUpdater } from "./";
-import { Answer, UserDocument } from "../../models";
+import { Answer, User } from "../../models";
 import { isWithinOneDay } from "../../utils";
 
 export class UserUpdater {
-  private user: UserDocument;
+  private user: User;
 
-  constructor(user: UserDocument) {
+  constructor(user: User) {
     this.user = user;
   }
 
@@ -55,7 +55,7 @@ export class UserUpdater {
     this.updateLastResultDate();
   };
 
-  public saveChanges = async (): Promise<UserDocument> => {
+  public saveChanges = async (): Promise<User> => {
     return await this.user.save();
   };
 }

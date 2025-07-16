@@ -1,5 +1,3 @@
-//import "express-async-errors";
-
 import https from "https";
 import dotenv from "dotenv";
 import express from "express";
@@ -20,6 +18,7 @@ async function main() {
   }
 
   await databaseConnector.connect();
+  await databaseConnector.initialize();
 
   const app = express();
   configureApp(app);

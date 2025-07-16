@@ -3,6 +3,8 @@ import {
   UserDocument,
   Statistics,
   Achievements,
+  AchievementsDocument,
+  StatisticsDocument,
   StatisticsImpl,
   AchievementsImpl
 } from "../../../models";
@@ -18,7 +20,7 @@ export class MongoDbUserRepository implements UserRepository {
     return UserModel.findOne({ vkId }).exec();
   };
 
-  public findStatistics = async (vkId: number): Promise<Statistics | null> => {
+  public findStatistics = async (vkId: number): Promise<StatisticsDocument | null> => {
     const user = await this.findByVkId(vkId);
     return user?.statistics ?? null;
   };
@@ -37,7 +39,7 @@ export class MongoDbUserRepository implements UserRepository {
     return await user.save();
   };
 
-  public findAchievements = async (vkId: number): Promise<Achievements | null> => {
+  public findAchievements = async (vkId: number): Promise<AchievementsDocument | null> => {
     const user = await this.findByVkId(vkId);
     return user?.achievements ?? null;
   };
@@ -56,12 +58,12 @@ export class MongoDbUserRepository implements UserRepository {
     return await user.save();
   };
 
-  public findMistakes = async (vkId: number): Promise<string[] | null> => {
+  public findMistakes = async (vkId: number): Promise<number[] | null> => {
     const user = await this.findByVkId(vkId);
     return user?.mistakeIds ?? null;
   };
 
-  public addMistakes = async (vkId: number, mistakeIds: string[]): Promise<boolean> => {
+  public addMistakes = async (vkId: number, mistakeIds: number[]): Promise<boolean> => {
     const result = await UserModel.updateOne(
       { vkId },
       { $addToSet: { mistakeIds: { $each: mistakeIds } } }
@@ -70,7 +72,7 @@ export class MongoDbUserRepository implements UserRepository {
     return result.matchedCount > 0;
   };
 
-  public deleteMistakes = async (vkId: number, mistakeIds: string[]): Promise<boolean> => {
+  public deleteMistakes = async (vkId: number, mistakeIds: number[]): Promise<boolean> => {
     const result = await UserModel.updateOne(
       { vkId },
       { $pull: { mistakeIds: { $in: mistakeIds } } }
