@@ -2,7 +2,7 @@
   "name": "cc2025-backend",
   "version": "1.0.0",
   "description": "server for the CC2025",
-  "main": "index.js",
+  "main": "dist/index.js",
   "author": "yakovypg",
   "license": "MIT",
   "private": false,
