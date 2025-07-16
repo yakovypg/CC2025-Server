@@ -31,39 +31,17 @@ export class MongoDbConnector implements DatabaseConnector {
   };
 
   public initialize = async (): Promise<void> => {
-    AchievementSchema.plugin(autoIncrement.plugin, {
-      model: AchievementModelName,
+    const createOptions = (modelName: string) => ({
+      model: modelName,
       field: "id",
       startAt: 1,
       incrementBy: 1
     });
 
-    AchievementsSchema.plugin(autoIncrement.plugin, {
-      model: AchievementsModelName,
-      field: "id",
-      startAt: 1,
-      incrementBy: 1
-    });
-
-    CardSchema.plugin(autoIncrement.plugin, {
-      model: CardModelName,
-      field: "id",
-      startAt: 1,
-      incrementBy: 1
-    });
-
-    StatisticsSchema.plugin(autoIncrement.plugin, {
-      model: StatisticsModelName,
-      field: "id",
-      startAt: 1,
-      incrementBy: 1
-    });
-
-    UserSchema.plugin(autoIncrement.plugin, {
-      model: UserModelName,
-      field: "id",
-      startAt: 1,
-      incrementBy: 1
-    });
+    AchievementSchema.plugin(autoIncrement.plugin, createOptions(AchievementModelName));
+    AchievementsSchema.plugin(autoIncrement.plugin, createOptions(AchievementsModelName));
+    CardSchema.plugin(autoIncrement.plugin, createOptions(CardModelName));
+    StatisticsSchema.plugin(autoIncrement.plugin, createOptions(StatisticsModelName));
+    UserSchema.plugin(autoIncrement.plugin, createOptions(UserModelName));
   };
 }

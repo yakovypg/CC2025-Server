@@ -1,29 +1,21 @@
-export {
-  Achievement,
-  AchievementDocument,
-  AchievementSchema,
-  AchievementModelName
-} from "./Achievement";
+export { Achievement } from "./Achievement";
+export { AchievementImpl } from "./AchievementImpl";
+export { AchievementDocument, AchievementSchema, AchievementModelName } from "./AchievementMongo";
+export { Achievements } from "./Achievements";
+export { AchievementsImpl } from "./AchievementsImpl";
 
 export {
-  Achievements,
   AchievementsDocument,
   AchievementsSchema,
   AchievementsModelName
-} from "./Achievements";
-
-export { Card, CardDocument, CardModel, CardSchema, CardModelName } from "./Card";
-
-export {
-  Statistics,
-  StatisticsDocument,
-  StatisticsSchema,
-  StatisticsModelName
-} from "./Statistics";
-
-export { User, UserDocument, UserModel, UserSchema, UserModelName } from "./User";
+} from "./AchievementsMongo";
 
 export { Answer } from "./Answer";
-export { AchievementImpl } from "./AchievementImpl";
-export { AchievementsImpl } from "./AchievementsImpl";
+export { Card } from "./Card";
+export { CardDocument, CardModel, CardSchema, CardModelName } from "./CardMongo";
+
+export { Statistics } from "./Statistics";
 export { StatisticsImpl } from "./StatisticsImpl";
+export { StatisticsDocument, StatisticsSchema, StatisticsModelName } from "./StatisticsMongo";
+export { User } from "./User";
+export { UserDocument, UserModel, UserSchema, UserModelName } from "./UserMongo";

@@ -1,10 +1,8 @@
 import fs from "fs";
 import express, { Express } from "express";
 
-import userRoutes from "../api/routes/user";
-import cardRoutes from "../api/routes/card";
-
 import { HttpsConfig, ServerConfig } from "../configuration";
+import { cardRoutes, userRoutes } from "../api/routes";
 import { errorHandler } from "../api/middlewares";
 
 export const loadHttpsConfig = (): HttpsConfig | null => {
