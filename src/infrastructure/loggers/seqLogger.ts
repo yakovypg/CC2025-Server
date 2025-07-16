@@ -1,5 +1,5 @@
 import pino, { Logger, LoggerOptions } from "pino";
-import pinoToSeq from "pino-seq";
+import { createStream } from "pino-seq";
 
 import { name, version } from "../../../package.json";
 
@@ -8,11 +8,9 @@ const createSeqLogger = (): Logger => {
   const serverUrl = process.env.SEQ_SERVER_URL ?? "http://localhost:5341";
   const batchSizeLimit = Number(process.env.LOGGER_BATCH_SIZE_LIMIT) ?? 50;
   const maxBatchingTimeMs = Number(process.env.LOGGER_MAX_BATCHING_TIME_MS) ?? 1000;
-  const apiKey = process.env.SEQ_API_KEY;
 
-  const seqStream = pinoToSeq.createStream({
+  const seqStream = createStream({
     serverUrl,
-    apiKey,
     batchSizeLimit: batchSizeLimit,
     maxBatchingTime: maxBatchingTimeMs
   });
