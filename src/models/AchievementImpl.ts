@@ -8,7 +8,7 @@ export class AchievementImpl implements Achievement {
 
   constructor(
     currentProgress: number = 0,
-    nextLevelProgress: number = 0,
+    nextLevelProgress: number = 1,
     level: number = 0,
     hasMaxLevel: boolean = false
   ) {
