@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import { StatusCode } from "status-code-enum";
 
 import {
   safeInvoke,
@@ -40,12 +39,9 @@ export class UserController {
       return;
     }
 
-    await safeInvoke(
-      res,
-      async () => await addUser(res, vkId, this.repository),
-      StatusCode.ClientErrorBadRequest,
-      "Cannot create user"
-    );
+    await safeInvoke(res, async () => {
+      await addUser(res, vkId, this.repository);
+    });
   };
 
   public getUser = async (req: Request, res: Response): Promise<void> => {

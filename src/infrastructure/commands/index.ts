@@ -1,6 +1,7 @@
 export { default as addUser } from "./addUser";
 export { default as addUserAnswers } from "./addUserAnswers";
 export { default as addUserMistakes } from "./addUserMistakes";
+export { default as checkUserExists } from "./checkUserExists";
 export { default as deleteUserMistakes } from "./deleteUserMistakes";
 export { default as getUser } from "./getUser";
 export { default as getUserAchievements } from "./getUserAchievements";
