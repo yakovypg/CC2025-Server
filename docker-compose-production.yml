@@ -5,8 +5,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: myapp-backend:latest
-    container_name: CC2025Backend
+    image: cc2025-server:latest
+    container_name: CC2025Server
     restart: on-failure
     env_file:
       - .env-production
