@@ -4,10 +4,7 @@ import { User } from "../../models";
 
 import { checkUserExists } from "./";
 
-const addUser = async (
-  userVkId: number,
-  repository: UserRepository
-): Promise<User> => {
+const addUser = async (userVkId: number, repository: UserRepository): Promise<User> => {
   const userExists = await checkUserExists(userVkId, repository);
 
   if (userExists) {

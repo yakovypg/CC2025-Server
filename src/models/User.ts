@@ -27,16 +27,14 @@ export interface UserDocument extends User, Document {
   save(...args: any[]): Promise<this>;
 }
 
-export const UserSchema: Schema = new Schema(
-  {
-    vkId: { type: Number, required: true, unique: true },
-    statistics: { type: StatisticsSchema, required: true },
-    achievements: { type: AchievementsSchema, required: true },
-    mistakeIds: { type: [Number], required: true },
-    lastResultDate: { type: Date, required: true },
-    registrationDate: { type: Date, required: true }
-  }
-);
+export const UserSchema: Schema = new Schema({
+  vkId: { type: Number, required: true, unique: true },
+  statistics: { type: StatisticsSchema, required: true },
+  achievements: { type: AchievementsSchema, required: true },
+  mistakeIds: { type: [Number], required: true },
+  lastResultDate: { type: Date, required: true },
+  registrationDate: { type: Date, required: true }
+});
 
 export const UserModelName: string = "User";
 

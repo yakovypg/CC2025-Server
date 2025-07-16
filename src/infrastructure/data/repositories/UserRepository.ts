@@ -1,8 +1,4 @@
-import {
-  Achievements,
-  Statistics,
-  User
-} from "../../../models";
+import { Achievements, Statistics, User } from "../../../models";
 
 export interface UserRepository {
   findAll(): Promise<User[]>;
@@ -11,11 +7,7 @@ export interface UserRepository {
   updateStatistics(vkId: number, statistics: Partial<Statistics>): Promise<User | null>;
   findStatistics(vkId: number): Promise<Statistics | null>;
 
-  updateAchievements(
-    vkId: number,
-    achievements: Partial<Achievements>
-  ): Promise<User | null>;
-
+  updateAchievements(vkId: number, achievements: Partial<Achievements>): Promise<User | null>;
   findAchievements(vkId: number): Promise<Achievements | null>;
 
   findMistakes(vkId: number): Promise<number[] | null>;
