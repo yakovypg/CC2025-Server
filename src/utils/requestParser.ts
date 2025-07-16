@@ -5,6 +5,7 @@ import {
   AchievementImpl,
   Achievements,
   AchievementsImpl,
+  Answer,
   Statistics,
   StatisticsImpl
 } from "../models";
@@ -57,12 +58,34 @@ export const getNumberArrayFromBody = (req: Request, res: Response): number[] | 
   }
 
   const mappedArr = arr.map((t) => Number(t));
-  const isMappedArrCorrect = mappedArr.some((t) => Number.isNaN(t));
+  const isMappedArrCorrect = mappedArr.every((t) => !Number.isNaN(t));
 
-  if (isMappedArrCorrect) {
+  if (!isMappedArrCorrect) {
     res.status(StatusCode.ClientErrorBadRequest).json("Invalid array");
     return null;
   }
+
+  return mappedArr;
+};
+
+export const getAnswerArrayFromBody = (req: Request, res: Response): Answer[] | null => {
+  const arr = getArrayFromBody(req, res);
+
+  if (!arr) {
+    return null;
+  }
+
+  const isArrCorrect = arr.every((t) => t.cardId !== undefined && t.isCorrect !== undefined);
+
+  if (!isArrCorrect) {
+    res.status(StatusCode.ClientErrorBadRequest).json("Invalid array");
+    return null;
+  }
+
+  const mappedArr: Answer[] = arr.map((t) => ({
+    cardId: String(t.cardId),
+    isCorrect: Boolean(Number(t.isCorrect))
+  }));
 
   return mappedArr;
 };

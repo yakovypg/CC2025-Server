@@ -1,6 +1,6 @@
 import {
   UserModel,
-  User,
+  UserDocument,
   Statistics,
   Achievements,
   StatisticsImpl,
@@ -10,11 +10,11 @@ import {
 import { UserRepository } from "./";
 
 export class MongoDbUserRepository implements UserRepository {
-  public findAll = async (): Promise<User[]> => {
+  public findAll = async (): Promise<UserDocument[]> => {
     return UserModel.find().exec();
   };
 
-  public findByVkId = async (vkId: number): Promise<User | null> => {
+  public findByVkId = async (vkId: number): Promise<UserDocument | null> => {
     return UserModel.findOne({ vkId }).exec();
   };
 
@@ -26,7 +26,7 @@ export class MongoDbUserRepository implements UserRepository {
   public updateStatistics = async (
     vkId: number,
     statistics: Partial<Statistics>
-  ): Promise<User | null> => {
+  ): Promise<UserDocument | null> => {
     const user = await this.findByVkId(vkId);
 
     if (!user) {
@@ -45,7 +45,7 @@ export class MongoDbUserRepository implements UserRepository {
   public updateAchievements = async (
     vkId: number,
     achievements: Partial<Achievements>
-  ): Promise<User | null> => {
+  ): Promise<UserDocument | null> => {
     const user = await this.findByVkId(vkId);
 
     if (!user) {
@@ -56,12 +56,12 @@ export class MongoDbUserRepository implements UserRepository {
     return await user.save();
   };
 
-  public findMistakes = async (vkId: number): Promise<number[] | null> => {
+  public findMistakes = async (vkId: number): Promise<string[] | null> => {
     const user = await this.findByVkId(vkId);
     return user?.mistakeIds ?? null;
   };
 
-  public addMistakes = async (vkId: number, mistakeIds: number[]): Promise<boolean> => {
+  public addMistakes = async (vkId: number, mistakeIds: string[]): Promise<boolean> => {
     const result = await UserModel.updateOne(
       { vkId },
       { $addToSet: { mistakeIds: { $each: mistakeIds } } }
@@ -70,7 +70,7 @@ export class MongoDbUserRepository implements UserRepository {
     return result.matchedCount > 0;
   };
 
-  public deleteMistakes = async (vkId: number, mistakeIds: number[]): Promise<boolean> => {
+  public deleteMistakes = async (vkId: number, mistakeIds: string[]): Promise<boolean> => {
     const result = await UserModel.updateOne(
       { vkId },
       { $pull: { mistakeIds: { $in: mistakeIds } } }
@@ -79,18 +79,20 @@ export class MongoDbUserRepository implements UserRepository {
     return result.matchedCount > 0;
   };
 
-  public addUser = async (vkId: number): Promise<User> => {
+  public addUser = async (vkId: number): Promise<UserDocument> => {
     const user = new UserModel({
       vkId,
       statistics: new StatisticsImpl(),
       achievements: new AchievementsImpl(),
-      mistakeIds: []
+      mistakeIds: [],
+      lastResultDate: new Date(1, 0, 1),
+      registrationDate: new Date()
     });
 
     return user.save();
   };
 
-  public deleteUserByVkId = async (vkId: number): Promise<User | null> => {
+  public deleteUserByVkId = async (vkId: number): Promise<UserDocument | null> => {
     return UserModel.findOneAndDelete({ vkId }).exec();
   };
 }

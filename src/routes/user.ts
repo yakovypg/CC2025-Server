@@ -19,4 +19,6 @@ router.delete("/:id/mistakes", userController.deleteMistakes);
 router.post("/:id/mistakes", userController.addMistakes);
 router.get("/:id/mistakes", userController.getMistakes);
 
+router.post("/:id/answers", userController.addAnswers);
+
 export default router;

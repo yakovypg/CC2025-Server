@@ -5,10 +5,24 @@ import {
   safeInvoke,
   getNumberIdFromBody,
   getNumberIdFromParams,
-  getNumberArrayFromBody,
+  getArrayFromBody,
+  getAnswerArrayFromBody,
   getStatisticsFromBody,
   getAchievementsFromBody
 } from "../utils";
+
+import {
+  addUser,
+  addUserAnswers,
+  addUserMistakes,
+  deleteUserMistakes,
+  getUser,
+  getUserAchievements,
+  getUserMistakes,
+  getUserStatistics,
+  updateUserAchievements,
+  updateUserStatistics
+} from "../commands";
 
 import { UserRepository } from "../repositories";
 
@@ -28,10 +42,7 @@ export class UserController {
 
     await safeInvoke(
       res,
-      async () => {
-        const user = await this.repository.addUser(vkId);
-        res.status(StatusCode.SuccessCreated).json(user);
-      },
+      async () => await addUser(res, vkId, this.repository),
       StatusCode.ClientErrorBadRequest,
       "Cannot create user"
     );
@@ -45,14 +56,7 @@ export class UserController {
     }
 
     await safeInvoke(res, async () => {
-      const user = await this.repository.findByVkId(vkId);
-
-      if (!user) {
-        res.status(StatusCode.ClientErrorNotFound).json("User not found");
-        return;
-      }
-
-      res.status(StatusCode.SuccessOK).json(user);
+      await getUser(res, vkId, this.repository);
     });
   };
 
@@ -65,14 +69,7 @@ export class UserController {
     }
 
     await safeInvoke(res, async () => {
-      const user = await this.repository.updateStatistics(vkId, statistics);
-
-      if (!user) {
-        res.status(StatusCode.ClientErrorNotFound).json("User statistics not found");
-        return;
-      }
-
-      res.status(StatusCode.SuccessOK).json(user.statistics);
+      await updateUserStatistics(res, vkId, statistics, this.repository);
     });
   };
 
@@ -84,14 +81,7 @@ export class UserController {
     }
 
     await safeInvoke(res, async () => {
-      const statistics = await this.repository.findStatistics(vkId);
-
-      if (!statistics) {
-        res.status(StatusCode.ClientErrorNotFound).json("User statistics not found");
-        return;
-      }
-
-      res.status(StatusCode.SuccessOK).json(statistics);
+      await getUserStatistics(res, vkId, this.repository);
     });
   };
 
@@ -104,14 +94,7 @@ export class UserController {
     }
 
     await safeInvoke(res, async () => {
-      const user = await this.repository.updateAchievements(vkId, achievements);
-
-      if (!user) {
-        res.status(StatusCode.ClientErrorNotFound).json("User achievements not found");
-        return;
-      }
-
-      res.status(StatusCode.SuccessOK).json(user.achievements);
+      await updateUserAchievements(res, vkId, achievements, this.repository);
     });
   };
 
@@ -123,54 +106,33 @@ export class UserController {
     }
 
     await safeInvoke(res, async () => {
-      const achievement = await this.repository.findAchievements(vkId);
-
-      if (!achievement) {
-        res.status(StatusCode.ClientErrorNotFound).json("User achievements not found");
-        return;
-      }
-
-      res.status(StatusCode.SuccessOK).json(achievement);
+      await getUserAchievements(res, vkId, this.repository);
     });
   };
 
   public addMistakes = async (req: Request, res: Response): Promise<void> => {
     const vkId = getNumberIdFromParams(req, res);
-    const mistakeIds = getNumberArrayFromBody(req, res);
+    const mistakeIds = getArrayFromBody(req, res);
 
     if (!vkId || !mistakeIds) {
       return;
     }
 
     await safeInvoke(res, async () => {
-      const ok = await this.repository.addMistakes(vkId, mistakeIds);
-
-      if (!ok) {
-        res.status(StatusCode.ClientErrorNotFound).json("User not found");
-        return;
-      }
-
-      res.status(StatusCode.SuccessCreated).json("OK");
+      await addUserMistakes(res, vkId, mistakeIds, this.repository);
     });
   };
 
   public deleteMistakes = async (req: Request, res: Response): Promise<void> => {
     const vkId = getNumberIdFromParams(req, res);
-    const mistakeIds = getNumberArrayFromBody(req, res);
+    const mistakeIds = getArrayFromBody(req, res);
 
     if (!vkId || !mistakeIds) {
       return;
     }
 
     await safeInvoke(res, async () => {
-      const ok = await this.repository.deleteMistakes(vkId, mistakeIds);
-
-      if (!ok) {
-        res.status(StatusCode.ClientErrorNotFound).json("User not found");
-        return;
-      }
-
-      res.status(StatusCode.SuccessOK).json("OK");
+      deleteUserMistakes(res, vkId, mistakeIds, this.repository);
     });
   };
 
@@ -182,14 +144,20 @@ export class UserController {
     }
 
     await safeInvoke(res, async () => {
-      const mistakes = await this.repository.findMistakes(vkId);
+      getUserMistakes(res, vkId, this.repository);
+    });
+  };
 
-      if (!mistakes) {
-        res.status(StatusCode.ClientErrorNotFound).json("User not found");
-        return;
-      }
+  public addAnswers = async (req: Request, res: Response): Promise<void> => {
+    const vkId = getNumberIdFromParams(req, res);
+    const answers = getAnswerArrayFromBody(req, res);
 
-      res.status(StatusCode.SuccessOK).json(mistakes);
+    if (!vkId || !answers) {
+      return;
+    }
+
+    await safeInvoke(res, async () => {
+      await addUserAnswers(res, vkId, answers, this.repository);
     });
   };
 }

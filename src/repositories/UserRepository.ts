@@ -1,19 +1,19 @@
-import { User, Statistics, Achievements } from "../models";
+import { UserDocument, Statistics, Achievements } from "../models";
 
 export interface UserRepository {
-  findAll(): Promise<User[]>;
-  findByVkId(vkId: number): Promise<User | null>;
+  findAll(): Promise<UserDocument[]>;
+  findByVkId(vkId: number): Promise<UserDocument | null>;
 
-  updateStatistics(vkId: number, statistics: Partial<Statistics>): Promise<User | null>;
+  updateStatistics(vkId: number, statistics: Partial<Statistics>): Promise<UserDocument | null>;
   findStatistics(vkId: number): Promise<Statistics | null>;
 
-  updateAchievements(vkId: number, achievements: Partial<Achievements>): Promise<User | null>;
+  updateAchievements(vkId: number, achievements: Partial<Achievements>): Promise<UserDocument | null>;
   findAchievements(vkId: number): Promise<Achievements | null>;
 
-  findMistakes(vkId: number): Promise<number[] | null>;
-  addMistakes(vkId: number, mistakeIds: number[]): Promise<boolean>;
-  deleteMistakes(vkId: number, mistakeIds: number[]): Promise<boolean>;
+  findMistakes(vkId: number): Promise<string[] | null>;
+  addMistakes(vkId: number, mistakeIds: string[]): Promise<boolean>;
+  deleteMistakes(vkId: number, mistakeIds: string[]): Promise<boolean>;
 
-  addUser(vkId: number): Promise<User>;
-  deleteUserByVkId(vkId: number): Promise<User | null>;
+  addUser(vkId: number): Promise<UserDocument>;
+  deleteUserByVkId(vkId: number): Promise<UserDocument | null>;
 }
