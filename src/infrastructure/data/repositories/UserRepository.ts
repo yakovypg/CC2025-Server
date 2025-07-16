@@ -1,4 +1,4 @@
-import { UserDocument, Statistics, Achievements } from "../models";
+import { UserDocument, Statistics, Achievements } from "../../../models";
 
 export interface UserRepository {
   findAll(): Promise<UserDocument[]>;

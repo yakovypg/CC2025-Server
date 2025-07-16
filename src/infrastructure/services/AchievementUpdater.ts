@@ -1,6 +1,6 @@
 import moment from "moment";
 
-import { UserDocument, Achievement } from "../models";
+import { UserDocument, Achievement } from "../../models";
 import { NotSupportedError } from "../errors";
 
 export class AchievementUpdater {

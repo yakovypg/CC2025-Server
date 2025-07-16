@@ -1,7 +1,7 @@
 import { Response } from "express";
 import { StatusCode } from "status-code-enum";
 
-import { UserRepository } from "../repositories";
+import { UserRepository } from "../../infrastructure/data/repositories";
 
 const getUserMistakes = async (res: Response, userVkId: number, repository: UserRepository) => {
   const mistakes = await repository.findMistakes(userVkId);

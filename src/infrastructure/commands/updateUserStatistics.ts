@@ -1,8 +1,8 @@
 import { Response } from "express";
 import { StatusCode } from "status-code-enum";
 
-import { Statistics } from "../models";
-import { UserRepository } from "../repositories";
+import { Statistics } from "../../models";
+import { UserRepository } from "../../infrastructure/data/repositories";
 
 const updateUserStatistics = async (
   res: Response,

@@ -1,7 +1,7 @@
 import { Router } from "express";
 
 import { CardController } from "../controllers";
-import { cardRepository } from "../repositories";
+import { cardRepository } from "../../infrastructure/data/repositories";
 
 const router = Router();
 const cardController = new CardController(cardRepository);

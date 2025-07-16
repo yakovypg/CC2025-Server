@@ -5,7 +5,7 @@ import {
   Achievements,
   StatisticsImpl,
   AchievementsImpl
-} from "../models";
+} from "../../../models";
 
 import { UserRepository } from "./";
 

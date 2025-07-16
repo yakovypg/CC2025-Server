@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 import express from "express";
 
 import { configureApp, loadServerConfig } from "./utils";
-import { databaseConnector } from "./data";
+import { databaseConnector } from "./infrastructure/data";
 
 async function main() {
   if (process.env.IS_DEBUG) {

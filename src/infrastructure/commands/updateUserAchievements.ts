@@ -1,8 +1,8 @@
 import { Response } from "express";
 import { StatusCode } from "status-code-enum";
 
-import { Achievements } from "../models";
-import { UserRepository } from "../repositories";
+import { Achievements } from "../../models";
+import { UserRepository } from "../../infrastructure/data/repositories";
 
 const updateUserAchievements = async (
   res: Response,

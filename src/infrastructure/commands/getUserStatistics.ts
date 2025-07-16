@@ -1,7 +1,7 @@
 import { Response } from "express";
 import { StatusCode } from "status-code-enum";
 
-import { UserRepository } from "../repositories";
+import { UserRepository } from "../../infrastructure/data/repositories";
 
 const getUserStatistics = async (res: Response, userVkId: number, repository: UserRepository) => {
   const statistics = await repository.findStatistics(userVkId);

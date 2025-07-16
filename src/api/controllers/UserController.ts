@@ -9,7 +9,7 @@ import {
   getAnswerArrayFromBody,
   getStatisticsFromBody,
   getAchievementsFromBody
-} from "../utils";
+} from "../../utils";
 
 import {
   addUser,
@@ -22,9 +22,9 @@ import {
   getUserStatistics,
   updateUserAchievements,
   updateUserStatistics
-} from "../commands";
+} from "../../infrastructure/commands";
 
-import { UserRepository } from "../repositories";
+import { UserRepository } from "../../infrastructure/data/repositories";
 
 export class UserController {
   private repository: UserRepository;

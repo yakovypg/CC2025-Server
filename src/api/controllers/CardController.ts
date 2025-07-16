@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import { StatusCode } from "status-code-enum";
 
-import { CardRepository } from "../repositories";
-import { safeInvoke, randomReduceArray } from "../utils";
+import { CardRepository } from "../../infrastructure/data/repositories";
+import { safeInvoke, randomReduceArray } from "../../utils";
 
 export class CardController {
   private repository: CardRepository;

@@ -1,6 +1,6 @@
 import { AchievementUpdater } from "./";
-import { Answer, UserDocument } from "../models";
-import { isWithinOneDay } from "../utils";
+import { Answer, UserDocument } from "../../models";
+import { isWithinOneDay } from "../../utils";
 
 export class UserUpdater {
   private user: UserDocument;

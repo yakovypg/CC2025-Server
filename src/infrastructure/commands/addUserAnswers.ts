@@ -1,10 +1,10 @@
 import { Response } from "express";
 import { StatusCode } from "status-code-enum";
 
-import { Answer } from "../models";
-import { UserRepository } from "../repositories";
+import { Answer } from "../../models";
+import { UserRepository } from "../../infrastructure/data/repositories";
 import { UserUpdater } from "../services";
-import { addUserMistakes } from "./";
+import { addUserMistakes } from ".";
 
 const addUserAnswers = async (
   res: Response,

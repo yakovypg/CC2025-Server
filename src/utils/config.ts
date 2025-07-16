@@ -3,8 +3,8 @@ import express, { Express, Request, Response, NextFunction } from "express";
 
 import { StatusCode } from "status-code-enum";
 
-import userRoutes from "../routes/user";
-import cardRoutes from "../routes/card";
+import userRoutes from "../api/routes/user";
+import cardRoutes from "../api/routes/card";
 
 import { HttpsConfig, ServerConfig } from "../configuration";
 

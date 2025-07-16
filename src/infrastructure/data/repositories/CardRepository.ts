@@ -1,4 +1,4 @@
-import { Card } from "../models";
+import { Card } from "../../../models";
 
 export interface CardRepository {
   findAll(): Promise<Card[]>;
