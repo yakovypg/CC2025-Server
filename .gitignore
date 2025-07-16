@@ -5,3 +5,7 @@ certificates/*.key
 certificates/*.cert
 
 .env
+.env-development
+.env-production
+
+.vscode
