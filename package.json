@@ -37,6 +37,7 @@
     "build": "yarn build:debug",
     "build:debug": "tsc --project tsconfig.debug.json",
     "build:release": "tsc --project tsconfig.release.json",
-    "serve": "cross-env IS_DEBUG=false NODE_ENV=production node dist/index.js"
+    "serve": "cross-env IS_DEBUG=false NODE_ENV=production node dist/index.js",
+    "format": "prettier --write \"**/*.{js,ts,tsx,json,css,scss}\""
   }
 }
