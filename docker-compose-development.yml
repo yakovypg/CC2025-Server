@@ -1,0 +1,22 @@
+name: cc2025-server
+
+services:
+  mongo-database:
+    image: mongo:6.0
+    container_name: CC2025Database
+    restart: on-failure
+    expose:
+      - 27017
+    ports:
+      - 27017:27017
+    volumes:
+      - mongo-data:/data/db
+      - ./scripts/mongo-init:/docker-entrypoint-initdb.d:ro
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 512M
+
+volumes:
+  mongo-data:
