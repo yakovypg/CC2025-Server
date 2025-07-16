@@ -1,3 +1,3 @@
 export interface DatabaseConnector {
-  connect(): void;
+  connect(): Promise<void>;
 }

@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import { DatabaseConnector } from "./";
 
 export class MongoDbConnector implements DatabaseConnector {
-  public connect = async () => {
+  public connect = async (): Promise<void> => {
     const connectionUrl = process.env.MONGODB_URI ?? "";
 
     try {
