@@ -14,6 +14,7 @@ import {
   UserModelName
 } from "../../models";
 
+import { logger } from "../loggers"
 import { DatabaseConnector } from "./";
 
 export class MongoDbConnector implements DatabaseConnector {
@@ -21,11 +22,14 @@ export class MongoDbConnector implements DatabaseConnector {
     const connectionUrl = process.env.MONGODB_URI ?? "";
 
     try {
+      logger.info("Trying to connect to MongoDB");
+
       await mongoose.connect(connectionUrl);
       autoIncrement.initialize(mongoose.connection);
-      console.log("MongoDB connected");
+
+      logger.info("MongoDB connected");
     } catch (error) {
-      console.error("Failed to connect to MongoDB:", error);
+      logger.error({ err: error }, "Failed to connect to MongoDB");
       process.exit(1);
     }
   };
@@ -38,10 +42,14 @@ export class MongoDbConnector implements DatabaseConnector {
       incrementBy: 1
     });
 
+    logger.info("Trying to initialize MongoDB models");
+
     AchievementSchema.plugin(autoIncrement.plugin, createOptions(AchievementModelName));
     AchievementsSchema.plugin(autoIncrement.plugin, createOptions(AchievementsModelName));
     CardSchema.plugin(autoIncrement.plugin, createOptions(CardModelName));
     StatisticsSchema.plugin(autoIncrement.plugin, createOptions(StatisticsModelName));
     UserSchema.plugin(autoIncrement.plugin, createOptions(UserModelName));
+
+    logger.info("MongoDB models initialized");
   };
 }

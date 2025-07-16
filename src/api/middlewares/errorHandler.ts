@@ -8,13 +8,15 @@ import {
   UserNotFoundError
 } from "../../infrastructure/errors";
 
+import { logger } from "../../infrastructure/loggers"
+
 export const errorHandler = async (
   error: unknown,
   _req: Request,
   res: Response,
   _next: NextFunction
 ) => {
-  console.log(error);
+  logger.error({ err: error });
 
   if (error instanceof UserNotFoundError || error instanceof UserExistsError) {
     res.status(StatusCode.ClientErrorBadRequest).json(error.message ?? "Bad request");

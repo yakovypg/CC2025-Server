@@ -18,5 +18,18 @@ services:
           cpus: '2'
           memory: 512M
 
+  seq:
+    image: datalust/seq:latest
+    container_name: Seq
+    restart: on-failure
+    ports:
+      - "5341:80"
+    environment:
+      - ACCEPT_EULA=Y
+      - SEQ_FIRSTRUN_ADMINPASSWORD=${SEQ_FIRSTRUN_ADMINPASSWORD}
+    volumes:
+      - seq-data:/data
+
 volumes:
   mongo-data:
+  seq-data:
