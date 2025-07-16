@@ -2,7 +2,7 @@
   "name": "cc2025-server",
   "version": "1.0.0",
   "description": "server for the CC2025",
-  "main": "dist/index.js",
+  "main": "index.js",
   "author": "yakovypg",
   "license": "MIT",
   "private": false,
