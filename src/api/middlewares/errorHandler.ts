@@ -3,9 +3,9 @@ import { StatusCode } from "status-code-enum";
 
 import {
   InternalServerError,
+  NotFoundError,
   NotSupportedError,
-  UserExistsError,
-  UserNotFoundError
+  UserExistsError
 } from "../../infrastructure/errors";
 
 import { logger } from "../../infrastructure/loggers";
@@ -18,7 +18,9 @@ export const errorHandler = async (
 ) => {
   logger.error({ err: error });
 
-  if (error instanceof UserNotFoundError || error instanceof UserExistsError) {
+  if (error instanceof NotFoundError) {
+    res.status(StatusCode.ClientErrorNotFound).json(error.message ?? "Not found");
+  } else if (error instanceof UserExistsError) {
     res.status(StatusCode.ClientErrorBadRequest).json(error.message ?? "Bad request");
   } else if (error instanceof NotSupportedError || error instanceof InternalServerError) {
     res.status(StatusCode.ServerErrorInternal).json(error.message ?? "Internal server error");
