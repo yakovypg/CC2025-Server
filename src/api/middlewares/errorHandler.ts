@@ -8,7 +8,7 @@ import {
   UserNotFoundError
 } from "../../infrastructure/errors";
 
-import { logger } from "../../infrastructure/loggers"
+import { logger } from "../../infrastructure/loggers";
 
 export const errorHandler = async (
   error: unknown,

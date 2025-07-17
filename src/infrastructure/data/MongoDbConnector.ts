@@ -14,7 +14,7 @@ import {
   UserModelName
 } from "../../models";
 
-import { logger } from "../loggers"
+import { logger } from "../loggers";
 import { DatabaseConnector } from "./";
 
 export class MongoDbConnector implements DatabaseConnector {

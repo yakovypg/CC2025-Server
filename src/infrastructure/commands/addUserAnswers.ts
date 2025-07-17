@@ -2,6 +2,7 @@ import { Answer, User } from "../../models";
 import { UserRepository } from "../../infrastructure/data/repositories";
 import { UserUpdater } from "../services";
 import { UserNotFoundError } from "../errors";
+import { logger } from "../loggers";
 import { addUserMistakes } from "./";
 
 const addUserAnswers = async (
@@ -9,9 +10,11 @@ const addUserAnswers = async (
   answers: Answer[],
   repository: UserRepository
 ): Promise<User> => {
+  logger.info({ userVkId, answers }, "Trying to add answers to the user");
   const user = await repository.findByVkId(userVkId);
 
   if (!user) {
+    logger.warn({ userVkId }, "User not found");
     throw new UserNotFoundError();
   }
 
@@ -21,7 +24,10 @@ const addUserAnswers = async (
   const userUpdater = new UserUpdater(user);
   userUpdater.updateAll(answers);
 
-  return await userUpdater.saveChanges();
+  const updatedUser = await userUpdater.saveChanges();
+  logger.info({ userVkId, answers }, "Answers added to the user");
+
+  return updatedUser;
 };
 
 export default addUserAnswers;

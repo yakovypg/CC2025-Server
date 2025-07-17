@@ -9,7 +9,7 @@ import express from "express";
 
 import { configureApp, loadServerConfig } from "./utils";
 import { databaseConnector } from "./infrastructure/data";
-import { logger } from "./infrastructure/loggers"
+import { logger } from "./infrastructure/loggers";
 
 async function main() {
   const config = loadServerConfig();
