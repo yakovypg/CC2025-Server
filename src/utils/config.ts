@@ -1,4 +1,5 @@
 import fs from "fs";
+import cors from "cors";
 import express, { Express } from "express";
 
 import { HttpsConfig, ServerConfig } from "../configuration";
@@ -41,6 +42,7 @@ export const loadServerConfig = (): ServerConfig | null => {
 
 export const configureApp = (app: Express): void => {
   app.use(express.json());
+  app.use(cors());
 
   app.use("/api/user", userRoutes);
   app.use("/api/card", cardRoutes);

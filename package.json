@@ -6,9 +6,20 @@
   "author": "yakovypg",
   "license": "MIT",
   "private": false,
+  "scripts": {
+    "start": "yarn start:debug",
+    "start:debug": "cross-env IS_DEBUG=true NODE_ENV=development ts-node src/index.ts",
+    "start:release": "cross-env IS_DEBUG=false NODE_ENV=production ts-node src/index.ts",
+    "build": "yarn build:debug",
+    "build:debug": "tsc --project tsconfig.debug.json",
+    "build:release": "tsc --project tsconfig.release.json",
+    "serve": "cross-env IS_DEBUG=false NODE_ENV=production node dist/index.js",
+    "format": "prettier --write \"**/*.{js,ts,tsx,json,css,scss}\""
+  },
   "dependencies": {
     "@alec016/mongoose-autoincrement": "^1.5.4",
     "@eslint-community/eslint-utils": "^4.7.0",
+    "cors": "^2.8.5",
     "cross-env": "^7.0.3",
     "dotenv": "^17.2.0",
     "express": "^5.1.0",
@@ -20,6 +31,7 @@
     "status-code-enum": "^1.0.0"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.19",
     "@types/express": "^5.0.3",
     "@types/mongoose": "^5.11.97",
     "@types/node": "^24.0.14",
@@ -33,15 +45,5 @@
     "prettier": "^3.6.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
-  },
-  "scripts": {
-    "start": "yarn start:debug",
-    "start:debug": "cross-env IS_DEBUG=true NODE_ENV=development ts-node src/index.ts",
-    "start:release": "cross-env IS_DEBUG=false NODE_ENV=production ts-node src/index.ts",
-    "build": "yarn build:debug",
-    "build:debug": "tsc --project tsconfig.debug.json",
-    "build:release": "tsc --project tsconfig.release.json",
-    "serve": "cross-env IS_DEBUG=false NODE_ENV=production node dist/index.js",
-    "format": "prettier --write \"**/*.{js,ts,tsx,json,css,scss}\""
   }
 }
