@@ -1,4 +1,4 @@
-name: Build TypeScript Server
+name: TypeScript Server
 
 on:
   push:
