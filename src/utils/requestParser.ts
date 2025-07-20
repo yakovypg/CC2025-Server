@@ -8,7 +8,7 @@ import {
 } from "../models";
 
 export const parseArray = (data: any): any[] | null => {
-  return Array.isArray(data) ? data : null;
+  return Array.isArray(data) ? data : [data];
 };
 
 export const parseNumberArray = (data: any): number[] | null => {
