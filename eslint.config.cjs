@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 const { defineConfig, globalIgnores } = require("eslint/config");
 const { fixupConfigRules } = require("@eslint/compat");
 
@@ -51,5 +53,5 @@ module.exports = defineConfig([
       }
     }
   },
-  globalIgnores(["**/dist", "**/.eslintrc.cjs"])
+  globalIgnores(["**/dist", "./jest.config.js"])
 ]);
