@@ -1,9 +1,9 @@
+import { Router } from "express";
 import asyncHandler from "express-async-handler";
 
-import { Router } from "express";
 
-import { CardController } from "../controllers";
 import { cardRepository } from "../../infrastructure/data/repositories";
+import { CardController } from "../controllers";
 
 const router = Router();
 const cardController = new CardController(cardRepository);

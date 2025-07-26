@@ -1,4 +1,5 @@
 import mongoose, { Document, Schema, Model } from "mongoose";
+
 import { Card } from "./";
 
 export interface CardDocument extends Card, Document {

@@ -1,9 +1,9 @@
 jest.mock("../../src/infrastructure/loggers");
 
+import { addUserAnswers } from "../../src/infrastructure/commands";
 import { UserRepository } from "../../src/infrastructure/data/repositories";
 import { UserNotFoundError } from "../../src/infrastructure/errors";
 import { AchievementsImpl, Answer, StatisticsImpl, User } from "../../src/models";
-import { addUserAnswers } from "../../src/infrastructure/commands";
 
 describe("addUserAnswers", () => {
   const userVkId = 1;

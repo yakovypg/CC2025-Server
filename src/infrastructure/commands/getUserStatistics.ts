@@ -1,6 +1,6 @@
 import { UserRepository } from "../../infrastructure/data/repositories";
-import { UserNotFoundError } from "../errors";
 import { Statistics } from "../../models";
+import { UserNotFoundError } from "../errors";
 import { logger } from "../loggers";
 
 const getUserStatistics = async (

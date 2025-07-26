@@ -1,8 +1,8 @@
-import { Answer, User } from "../../models";
 import { UserRepository } from "../../infrastructure/data/repositories";
-import { UserUpdater } from "../services";
+import { Answer, User } from "../../models";
 import { UserNotFoundError } from "../errors";
 import { logger } from "../loggers";
+import { UserUpdater } from "../services";
 import { addUserMistakes } from "./";
 
 const addUserAnswers = async (

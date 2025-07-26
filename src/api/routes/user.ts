@@ -1,9 +1,9 @@
+import { Router } from "express";
 import asyncHandler from "express-async-handler";
 
-import { Router } from "express";
 
-import { UserController } from "../controllers";
 import { userRepository } from "../../infrastructure/data/repositories";
+import { UserController } from "../controllers";
 
 const router = Router();
 const userController = new UserController(userRepository);

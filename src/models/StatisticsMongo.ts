@@ -1,4 +1,5 @@
 import { Document, Schema } from "mongoose";
+
 import { Statistics } from "./";
 
 export interface StatisticsDocument extends Statistics, Document {}

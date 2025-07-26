@@ -1,16 +1,6 @@
 import { Request, Response } from "express";
 
 import {
-  parseAnswerArray,
-  parseNumberArray,
-  parseStatistics,
-  parseAchievements,
-  answerSuccessCreated,
-  answerBadRequest,
-  answerSuccessOk
-} from "../../utils";
-
-import {
   addUser,
   addUserAnswers,
   addUserMistakes,
@@ -22,8 +12,16 @@ import {
   updateUserAchievements,
   updateUserStatistics
 } from "../../infrastructure/commands";
-
 import { UserRepository } from "../../infrastructure/data/repositories";
+import {
+  parseAnswerArray,
+  parseNumberArray,
+  parseStatistics,
+  parseAchievements,
+  answerSuccessCreated,
+  answerBadRequest,
+  answerSuccessOk
+} from "../../utils";
 
 export class UserController {
   private repository: UserRepository;

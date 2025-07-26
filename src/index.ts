@@ -1,15 +1,15 @@
+import https from "https";
+
 import dotenv from "dotenv";
+import express from "express";
 
 if (process.env.IS_DEBUG) {
   dotenv.config({ path: ".env-development" });
 }
 
-import https from "https";
-import express from "express";
-
-import { configureApp, loadServerConfig } from "./utils";
 import { databaseConnector } from "./infrastructure/data";
 import { logger } from "./infrastructure/loggers";
+import { configureApp, loadServerConfig } from "./utils";
 
 async function main() {
   const config = loadServerConfig();

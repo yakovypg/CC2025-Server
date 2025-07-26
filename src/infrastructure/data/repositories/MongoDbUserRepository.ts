@@ -1,3 +1,4 @@
+import { UserRepository } from "./";
 import {
   UserModel,
   UserDocument,
@@ -9,7 +10,6 @@ import {
   AchievementsImpl
 } from "../../../models";
 
-import { UserRepository } from "./";
 
 export class MongoDbUserRepository implements UserRepository {
   public findAll = async (): Promise<UserDocument[]> => {

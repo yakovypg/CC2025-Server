@@ -1,5 +1,5 @@
-import { CardDocument, CardModel } from "../../../models";
 import { CardRepository } from "./";
+import { CardDocument, CardModel } from "../../../models";
 
 export class MongoDbCardRepository implements CardRepository {
   public findAll = async (): Promise<CardDocument[]> => {

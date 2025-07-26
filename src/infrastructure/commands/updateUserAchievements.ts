@@ -1,5 +1,5 @@
-import { Achievements } from "../../models";
 import { UserRepository } from "../../infrastructure/data/repositories";
+import { Achievements } from "../../models";
 import { UserNotFoundError } from "../errors";
 import { logger } from "../loggers";
 

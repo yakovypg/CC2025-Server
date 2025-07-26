@@ -1,10 +1,11 @@
 import fs from "fs";
+
 import cors from "cors";
 import express, { Express } from "express";
 
-import { HttpsConfig, ServerConfig } from "../configuration";
-import { cardRoutes, userRoutes } from "../api/routes";
 import { errorHandler } from "../api/middlewares";
+import { cardRoutes, userRoutes } from "../api/routes";
+import { HttpsConfig, ServerConfig } from "../configuration";
 
 export const loadHttpsConfig = (): HttpsConfig | null => {
   const httpsKeyPath = process.env.HTTPS_KEY_PATH;

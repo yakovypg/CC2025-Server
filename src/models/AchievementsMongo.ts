@@ -1,4 +1,5 @@
 import { Document, Schema } from "mongoose";
+
 import { Achievements, AchievementDocument, AchievementSchema } from "./";
 
 export interface AchievementsDocument extends Achievements, Document {

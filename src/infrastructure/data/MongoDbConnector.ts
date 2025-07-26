@@ -1,5 +1,5 @@
-import mongoose from "mongoose";
 import * as autoIncrement from "@alec016/mongoose-autoincrement";
+import mongoose from "mongoose";
 
 import {
   StatisticsSchema,
@@ -13,7 +13,6 @@ import {
   UserSchema,
   UserModelName
 } from "../../models";
-
 import { logger } from "../loggers";
 import { DatabaseConnector } from "./";
 

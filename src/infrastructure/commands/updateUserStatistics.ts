@@ -1,5 +1,5 @@
-import { Statistics } from "../../models";
 import { UserRepository } from "../../infrastructure/data/repositories";
+import { Statistics } from "../../models";
 import { UserNotFoundError } from "../errors";
 import { logger } from "../loggers";
 

@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 
+import { getCards } from "../../infrastructure/commands/";
 import { CardRepository } from "../../infrastructure/data/repositories";
 import { parseNumberArray, answerSuccessOk } from "../../utils";
-import { getCards } from "../../infrastructure/commands/";
 
 export class CardController {
   private repository: CardRepository;

@@ -1,6 +1,6 @@
 import { UserRepository } from "../../infrastructure/data/repositories";
-import { UserExistsError } from "../errors";
 import { User } from "../../models";
+import { UserExistsError } from "../errors";
 import { logger } from "../loggers";
 import { checkUserExists } from "./";
 
