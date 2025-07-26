@@ -34,7 +34,11 @@ yarn build:release
 
 ### Test
 
-Currently, tests have not been written.
+You can execute tests using the following command.
+
+```bash
+yarn test
+```
 
 ### Start
 
