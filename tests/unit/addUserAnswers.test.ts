@@ -52,7 +52,7 @@ describe("addUserAnswers", () => {
     expect(user.statistics.correctAnswers).toBe(5);
     expect(user.statistics.incorrectAnswers).toBe(1);
     expect(user.statistics.currentSeries).toBe(2);
-    expect(user.statistics.bestSeries).toBe(2);
+    expect(user.statistics.bestSeries).toBe(3);
     expect(user.statistics.strikeCounter).toBe(0);
 
     expect(user.achievements.daysInStrike.currentProgress).toBe(0);
@@ -65,13 +65,13 @@ describe("addUserAnswers", () => {
     expect(user.achievements.rightAnswers.level).toBe(Math.ceil(Math.log2(5 + 1)));
     expect(user.achievements.rightAnswers.hasMaxLevel).toBe(false);
 
-    expect(user.achievements.perfectSeries.currentProgress).toBe(2);
+    expect(user.achievements.perfectSeries.currentProgress).toBe(3);
 
     expect(user.achievements.perfectSeries.nextLevelProgress).toBe(
-      2 ** Math.ceil(Math.log2(2 + 1))
+      2 ** Math.ceil(Math.log2(3 + 1))
     );
 
-    expect(user.achievements.perfectSeries.level).toBe(Math.ceil(Math.log2(2 + 1)));
+    expect(user.achievements.perfectSeries.level).toBe(Math.ceil(Math.log2(3 + 1)));
     expect(user.achievements.perfectSeries.hasMaxLevel).toBe(false);
 
     expect(user.achievements.veteran.currentProgress).toBe(0);
