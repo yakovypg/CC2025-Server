@@ -14,5 +14,14 @@ module.exports = {
   ignorePatterns: ["dist", ".eslintrc.cjs"],
   plugins: ["react-refresh"],
   parser: "@typescript-eslint/parser",
-  rules: {}
+  rules: {
+    "import/order": [
+      "error",
+      {
+        "newlines-between": "always",
+        groups: ["builtin", "external", "internal"],
+        alphabetize: { order: "asc", caseInsensitive: true }
+      }
+    ]
+  }
 };
