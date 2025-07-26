@@ -15,7 +15,9 @@
     "build:release": "tsc --project tsconfig.release.json",
     "serve": "cross-env IS_DEBUG=false NODE_ENV=production node dist/index.js",
     "test": "jest",
-    "format": "prettier --write \"**/*.{js,ts,tsx,json,css,scss}\""
+    "format": "yarn format-eslint && yarn format-prettier",
+    "format-eslint": "yarn eslint \"{src,tests}/**/*.{ts,tsx,js,jsx}\" --fix",
+    "format-prettier": "prettier --write \"**/*.{js,ts,tsx,json,css,scss}\""
   },
   "dependencies": {
     "@alec016/mongoose-autoincrement": "^1.5.4",
