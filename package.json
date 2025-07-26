@@ -14,6 +14,7 @@
     "build:debug": "tsc --project tsconfig.debug.json",
     "build:release": "tsc --project tsconfig.release.json",
     "serve": "cross-env IS_DEBUG=false NODE_ENV=production node dist/index.js",
+    "test": "jest",
     "format": "prettier --write \"**/*.{js,ts,tsx,json,css,scss}\""
   },
   "dependencies": {
@@ -31,8 +32,13 @@
     "status-code-enum": "^1.0.0"
   },
   "devDependencies": {
+    "@eslint/compat": "^1.3.1",
+    "@eslint/eslintrc": "^3.3.1",
+    "@eslint/js": "^9.32.0",
+    "@eslint/migrate-config": "1.5.2",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.3",
+    "@types/jest": "^30.0.0",
     "@types/mongoose": "^5.11.97",
     "@types/node": "^24.0.14",
     "@typescript-eslint/eslint-plugin": "^8.37.0",
@@ -41,8 +47,12 @@
     "@typescript-eslint/utils": "^8.37.0",
     "eslint": "^9.31.0",
     "eslint-config-prettier": "^10.1.5",
+    "eslint-import-resolver-typescript": "^4.4.4",
+    "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-react-hooks": "^5.2.0",
+    "jest": "^30.0.5",
     "prettier": "^3.6.2",
+    "ts-jest": "^29.4.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
   }
