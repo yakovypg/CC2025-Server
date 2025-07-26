@@ -25,19 +25,31 @@ export class UserUpdater {
     this.user.statistics.incorrectAnswers += incorrectAnswers;
   };
 
-  private updateBestSeriesStatistics = (answers: Answer[]): void => {
-    const firstIncorrectAnswersIndex = answers.findIndex((t) => !t.isCorrect);
+  private updateBestSeriesStatistics = (): void => {
+    if (this.user.statistics.currentSeries > this.user.statistics.bestSeries) {
+      this.user.statistics.bestSeries = this.user.statistics.currentSeries;
+    }
+  }
 
-    const bestSeriesDelta =
-      firstIncorrectAnswersIndex < 0 ? answers.length : firstIncorrectAnswersIndex;
+  private updateCurrentSeriesStatistics = (answers: Answer[]): void => {
+    const currentSeries = this.user.statistics.currentSeries;
 
-    this.user.statistics.bestSeries += bestSeriesDelta;
+    const newSeries = answers
+      .map((t) => t.isCorrect)
+      .reduce((currValue, isCorrect) => (isCorrect ? currValue + 1 : 0), currentSeries);
+
+    this.user.statistics.currentSeries = newSeries;
   };
+
+  private updateSeriesStatistics = (answers: Answer[]): void => {
+    this.updateCurrentSeriesStatistics(answers);
+    this.updateBestSeriesStatistics();
+  }
 
   public updateStatistics = (answers: Answer[]): void => {
     this.updateStrikeCounterStatistics();
     this.updateAnswerStatistics(answers);
-    this.updateBestSeriesStatistics(answers);
+    this.updateSeriesStatistics(answers);
   };
 
   public updateAchievements = (): void => {

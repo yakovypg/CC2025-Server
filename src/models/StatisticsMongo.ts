@@ -8,6 +8,7 @@ export const StatisticsSchema: Schema = new Schema(
     id: { type: Number, required: true, unique: true },
     correctAnswers: { type: Number, required: true },
     incorrectAnswers: { type: Number, required: true },
+    currentSeries: { type: Number, required: true },
     bestSeries: { type: Number, required: true },
     strikeCounter: { type: Number, required: true }
   },
