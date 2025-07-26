@@ -6,8 +6,8 @@ export class MongoDbCardRepository implements CardRepository {
     return CardModel.find().exec();
   };
 
-  public findById = async (id: number): Promise<CardDocument[]> => {
-    return CardModel.find({ id: id }).exec();
+  public findById = async (id: number): Promise<CardDocument | null> => {
+    return CardModel.findOne({ id: id }).exec();
   };
 
   public findByIds = async (ids: number[]): Promise<CardDocument[]> => {
