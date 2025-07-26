@@ -43,6 +43,7 @@
     "@types/jest": "^30.0.0",
     "@types/mongoose": "^5.11.97",
     "@types/node": "^24.0.14",
+    "@types/supertest": "^6.0.3",
     "@typescript-eslint/eslint-plugin": "^8.37.0",
     "@typescript-eslint/parser": "^8.37.0",
     "@typescript-eslint/type-utils": "^8.37.0",
@@ -54,6 +55,7 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "jest": "^30.0.5",
     "prettier": "^3.6.2",
+    "supertest": "^7.1.4",
     "ts-jest": "^29.4.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
