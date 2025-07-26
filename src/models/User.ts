@@ -8,5 +8,5 @@ export interface User {
   lastResultDate: Date;
   registrationDate: Date;
 
-  save(...args: any[]): Promise<this>;
+  save(...args: unknown[]): Promise<this>;
 }

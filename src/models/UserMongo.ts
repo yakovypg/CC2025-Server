@@ -12,7 +12,7 @@ export interface UserDocument extends User, Document {
   statistics: StatisticsDocument;
   achievements: AchievementsDocument;
 
-  save(...args: any[]): Promise<this>;
+  save(...args: unknown[]): Promise<this>;
 }
 
 export const UserSchema: Schema = new Schema({

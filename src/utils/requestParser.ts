@@ -7,11 +7,11 @@ import {
   StatisticsImpl
 } from "../models";
 
-export const parseArray = (data: any): any[] | null => {
+export const parseArray = (data: unknown): unknown[] | null => {
   return Array.isArray(data) ? data : [data];
 };
 
-export const parseNumberArray = (data: any): number[] | null => {
+export const parseNumberArray = (data: unknown): number[] | null => {
   const arr = parseArray(data);
 
   if (!arr) {
@@ -24,14 +24,24 @@ export const parseNumberArray = (data: any): number[] | null => {
   return isMappedArrCorrect ? mappedArr : null;
 };
 
-export const parseAnswerArray = (data: any): Answer[] | null => {
+export const parseAnswerArray = (data: unknown): Answer[] | null => {
   const arr = parseArray(data);
 
   if (!arr) {
     return null;
   }
 
-  const isArrCorrect = arr.every((t) => t.cardId !== undefined && t.isCorrect !== undefined);
+  function isAnswer(obj: unknown): obj is Answer {
+    return (
+      obj !== null &&
+      obj !== undefined &&
+      typeof obj === "object" &&
+      "cardId" in obj &&
+      "isCorrect" in obj
+    );
+  }
+
+  const isArrCorrect = arr.every(isAnswer);
 
   if (!isArrCorrect) {
     return null;
@@ -47,7 +57,11 @@ export const parseAnswerArray = (data: any): Answer[] | null => {
   return isMappedArrCorrect ? mappedArr : null;
 };
 
-export const parseStatistics = (data: any): Partial<Statistics> | null => {
+export const parseStatistics = (data: unknown): Partial<Statistics> | null => {
+  if (!data || Array.isArray(data) || typeof data !== "object") {
+    return null;
+  }
+
   const allowedKeys = Object.keys(new StatisticsImpl());
   const bodyKeys = Object.keys(data);
 
@@ -60,11 +74,15 @@ export const parseStatistics = (data: any): Partial<Statistics> | null => {
   return data;
 };
 
-export const parseAchievements = (data: any): Partial<Achievements> | null => {
+export const parseAchievements = (data: unknown): Partial<Achievements> | null => {
+  if (!data || Array.isArray(data) || typeof data !== "object") {
+    return null;
+  }
+
   const allowedKeys = Object.keys(new AchievementsImpl());
   const allowedAchievementKeys = Object.keys(new AchievementImpl());
 
-  const body = data;
+  const body = data as Record<string, unknown>;
   const bodyKeys = Object.keys(body);
 
   const isBodyCorrect =
@@ -72,6 +90,7 @@ export const parseAchievements = (data: any): Partial<Achievements> | null => {
     bodyKeys.every(
       (key) =>
         allowedKeys.includes(key) &&
+        body[key] &&
         Object.keys(body[key]).every((subkey) => allowedAchievementKeys.includes(subkey))
     );
 

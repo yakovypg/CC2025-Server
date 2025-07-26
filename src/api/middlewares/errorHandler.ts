@@ -7,14 +7,13 @@ import {
   NotSupportedError,
   UserExistsError
 } from "../../infrastructure/errors";
-
 import { logger } from "../../infrastructure/loggers";
 
 export const errorHandler = async (
   error: unknown,
   _req: Request,
   res: Response,
-  _next: NextFunction
+  _next: NextFunction // eslint-disable-line @typescript-eslint/no-unused-vars
 ) => {
   logger.error({ err: error });
 
