@@ -25,25 +25,25 @@ export class UserUpdater {
     this.user.statistics.incorrectAnswers += incorrectAnswers;
   };
 
-  private updateBestSeriesStatistics = (): void => {
-    if (this.user.statistics.currentSeries > this.user.statistics.bestSeries) {
-      this.user.statistics.bestSeries = this.user.statistics.currentSeries;
-    }
-  };
-
-  private updateCurrentSeriesStatistics = (answers: Answer[]): void => {
-    const currentSeries = this.user.statistics.currentSeries;
-
-    const newSeries = answers
-      .map((t) => t.isCorrect)
-      .reduce((currValue, isCorrect) => (isCorrect ? currValue + 1 : 0), currentSeries);
-
-    this.user.statistics.currentSeries = newSeries;
-  };
-
   private updateSeriesStatistics = (answers: Answer[]): void => {
-    this.updateCurrentSeriesStatistics(answers);
-    this.updateBestSeriesStatistics();
+    let currentSeries = this.user.statistics.currentSeries;
+    let bestSeries = this.user.statistics.bestSeries;
+
+    answers.forEach((answer: Answer) => {
+      if (!answer.isCorrect) {
+        currentSeries = 0;
+        return;
+      }
+
+      currentSeries++;
+
+      if (currentSeries > bestSeries) {
+        bestSeries = currentSeries;
+      }
+    });
+
+    this.user.statistics.currentSeries = currentSeries;
+    this.user.statistics.bestSeries = bestSeries;
   };
 
   public updateStatistics = (answers: Answer[]): void => {
