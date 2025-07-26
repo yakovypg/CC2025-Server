@@ -1,6 +1,6 @@
 import { AchievementUpdater } from ".";
 import { Answer, User } from "../../models";
-import { isWithinOneDay } from "../../utils";
+import { isEqualWithoutRegardToTime, isWithinOneDay } from "../../utils";
 
 export class UserUpdater {
   private user: User;
@@ -12,6 +12,11 @@ export class UserUpdater {
   private updateStrikeCounterStatistics = (): void => {
     const currentDate = new Date();
     const lastResultDate = this.user.lastResultDate;
+
+    if (isEqualWithoutRegardToTime(currentDate, lastResultDate)) {
+      return;
+    }
+
     const stillInStrike = isWithinOneDay(currentDate, lastResultDate);
 
     this.user.statistics.strikeCounter = stillInStrike ? this.user.statistics.strikeCounter + 1 : 0;
