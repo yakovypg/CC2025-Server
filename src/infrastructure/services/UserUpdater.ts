@@ -1,4 +1,4 @@
-import { AchievementUpdater } from "./";
+import { AchievementUpdater } from ".";
 import { Answer, User } from "../../models";
 import { isWithinOneDay } from "../../utils";
 

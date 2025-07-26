@@ -6,7 +6,7 @@ import {
   StatisticsDocument,
   StatisticsSchema,
   User
-} from "./";
+} from ".";
 
 export interface UserDocument extends User, Document {
   statistics: StatisticsDocument;

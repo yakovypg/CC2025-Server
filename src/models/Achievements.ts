@@ -1,4 +1,4 @@
-import { Achievement } from "./";
+import { Achievement } from ".";
 
 export interface Achievements {
   daysInStrike: Achievement;

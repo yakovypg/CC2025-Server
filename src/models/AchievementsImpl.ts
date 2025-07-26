@@ -1,4 +1,4 @@
-import { Achievement, Achievements, AchievementImpl } from "./";
+import { Achievement, Achievements, AchievementImpl } from ".";
 
 export class AchievementsImpl implements Achievements {
   public daysInStrike: Achievement;

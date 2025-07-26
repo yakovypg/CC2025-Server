@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 
-import { getCards } from "../../infrastructure/commands/";
+import { getCards } from "../../infrastructure/commands";
 import { CardRepository } from "../../infrastructure/data/repositories";
 import { parseNumberArray, answerSuccessOk } from "../../utils";
 

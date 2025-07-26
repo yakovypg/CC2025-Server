@@ -1,4 +1,4 @@
-import { Achievement } from "./";
+import { Achievement } from ".";
 
 export class AchievementImpl implements Achievement {
   public currentProgress: number;

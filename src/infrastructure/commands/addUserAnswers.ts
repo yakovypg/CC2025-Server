@@ -1,9 +1,9 @@
+import { addUserMistakes } from ".";
 import { UserRepository } from "../../infrastructure/data/repositories";
 import { Answer, User } from "../../models";
 import { UserNotFoundError } from "../errors";
 import { logger } from "../loggers";
 import { UserUpdater } from "../services";
-import { addUserMistakes } from "./";
 
 const addUserAnswers = async (
   userVkId: number,

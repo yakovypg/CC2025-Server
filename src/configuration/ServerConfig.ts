@@ -1,4 +1,4 @@
-import { HttpsConfig } from "./";
+import { HttpsConfig } from ".";
 
 export interface ServerConfig {
   port: number;

@@ -1,4 +1,4 @@
-import { Achievements, Statistics } from "./";
+import { Achievements, Statistics } from ".";
 
 export interface User {
   vkId: number;

@@ -1,8 +1,8 @@
+import { checkUserExists } from ".";
 import { UserRepository } from "../../infrastructure/data/repositories";
 import { User } from "../../models";
 import { UserExistsError } from "../errors";
 import { logger } from "../loggers";
-import { checkUserExists } from "./";
 
 const addUser = async (userVkId: number, repository: UserRepository): Promise<User> => {
   logger.info({ userVkId }, "Trying to add user");
