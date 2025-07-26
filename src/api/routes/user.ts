@@ -1,7 +1,6 @@
 import { Router } from "express";
 import asyncHandler from "express-async-handler";
 
-
 import { userRepository } from "../../infrastructure/data/repositories";
 import { UserController } from "../controllers";
 

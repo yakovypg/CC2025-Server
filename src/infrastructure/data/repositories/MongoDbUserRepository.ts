@@ -10,7 +10,6 @@ import {
   AchievementsImpl
 } from "../../../models";
 
-
 export class MongoDbUserRepository implements UserRepository {
   public findAll = async (): Promise<UserDocument[]> => {
     return UserModel.find().exec();

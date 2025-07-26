@@ -29,7 +29,7 @@ export class UserUpdater {
     if (this.user.statistics.currentSeries > this.user.statistics.bestSeries) {
       this.user.statistics.bestSeries = this.user.statistics.currentSeries;
     }
-  }
+  };
 
   private updateCurrentSeriesStatistics = (answers: Answer[]): void => {
     const currentSeries = this.user.statistics.currentSeries;
@@ -44,7 +44,7 @@ export class UserUpdater {
   private updateSeriesStatistics = (answers: Answer[]): void => {
     this.updateCurrentSeriesStatistics(answers);
     this.updateBestSeriesStatistics();
-  }
+  };
 
   public updateStatistics = (answers: Answer[]): void => {
     this.updateStrikeCounterStatistics();
