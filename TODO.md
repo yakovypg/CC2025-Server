@@ -3,4 +3,4 @@ This is the TODO file where you can find some features and content that need to 
 
 ## List
 - [ ] Add the ability to add new cards without using database initializing script.
-- [ ] Add more tests
+- [ ] Add more tests.
