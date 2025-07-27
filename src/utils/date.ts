@@ -5,7 +5,7 @@ export const isEqualWithoutRegardToTime = (lhs: Date, rhs: Date): boolean => {
   const rhsMoment = moment(rhs);
 
   return lhsMoment.isSame(rhsMoment, "day");
-}
+};
 
 export const isWithinOneDay = (currDate: Date, prevDate: Date): boolean => {
   if (currDate < prevDate) {
