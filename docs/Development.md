@@ -61,6 +61,7 @@ yarn serve
 ```
 
 ## Scripts
+
 You can utilize the scripts included in the `package.json` file to work efficiently with the server and its code. For example, you can run `yarn format` to format all source files or `yarn build:debug` to build the server in debug mode.
 
 ## Change Initial Cards
