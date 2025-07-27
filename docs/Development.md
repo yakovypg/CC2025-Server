@@ -14,7 +14,7 @@ This document provides useful information for developers to enhance the project.
 
 ## Quick Start
 
-Before you start using the server, you should create certificates and files with environment variables. You can read more about this in the corresponding part of the [documentation](Deployment.md). You can create all necessary files using the [configure.sh](../configure.sh) script or do everything manually.
+Before you start using the server, you should create certificates and files with environment variables. You can read more about this in the corresponding part of the [documentation](Deployment.md). You can create all necessary files using the [configure.sh](../configure.sh) script or do everything manually. Please note that if you want to use our script, `openssl`, `sed`, `bash`, `cp`, and `cd` must be installed on your system.
 
 You should also execute the `yarn init` command if you are going to start the server for the first time.
 
