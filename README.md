@@ -25,6 +25,8 @@
 
 ## Quick Start
 
+First, ensure that `openssl`, `sed`, `bash`, `cp`, and `cd` are installed on your system. These utilities are used in the [configure.sh](./configure.sh) script, which creates certificates and files with environment variables. If you prefer not to install these utilities, you can manually create the necessary files and skip the first step described below.
+
 The easiest way to start the server is presented in the following steps:
 1. Configure the project using `bash ./configure.sh`.
 2. Initialize the packages with `yarn init`.
