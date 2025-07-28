@@ -28,6 +28,7 @@ export const loadHttpsConfig = (): HttpsConfig | null => {
 export const loadServerConfig = (): ServerConfig | null => {
   const port = Number(process.env.PORT);
   const host = process.env.HOST;
+  const useHttps = process.env.USE_HTTPS === "1";
   const httpsConfig = loadHttpsConfig();
 
   if (Number.isNaN(port) || !host || !httpsConfig) {
@@ -37,6 +38,7 @@ export const loadServerConfig = (): ServerConfig | null => {
   return {
     port: port,
     host: host,
+    useHttps: useHttps,
     httpsConfig: httpsConfig
   };
 };

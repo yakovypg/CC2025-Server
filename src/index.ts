@@ -25,9 +25,15 @@ async function main() {
   const app = express();
   configureApp(app);
 
-  https.createServer(config.httpsConfig, app).listen(config.port, config.host, () => {
-    logger.info(`Server is running on https://${config.host}:${config.port}`);
-  });
+  if (config.useHttps) {
+    https.createServer(config.httpsConfig, app).listen(config.port, config.host, () => {
+      logger.info(`Server is running on https://${config.host}:${config.port}`);
+    });
+  } else {
+    app.listen(config.port, config.host, () => {
+      logger.info(`Server is running on http://${config.host}:${config.port}`);
+    });
+  }
 }
 
 main();
