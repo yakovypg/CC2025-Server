@@ -15,11 +15,6 @@ services:
     depends_on:
       - mongo-database
       - seq
-    deploy:
-      resources:
-        limits:
-          cpus: '2'
-          memory: 512M
     volumes:
       - ./certificates:/app/certificates
 
@@ -34,11 +29,6 @@ services:
     volumes:
       - mongo-data:/data/db
       - ./scripts/mongo-init:/docker-entrypoint-initdb.d:ro
-    deploy:
-      resources:
-        limits:
-          cpus: '2'
-          memory: 512M
 
   seq:
     image: datalust/seq:latest
