@@ -8,7 +8,7 @@ export interface CardDocument extends Card, Document {
 
 export const CardSchema: Schema = new Schema({
   id: { type: Number, required: true, unique: true },
-  frontText: { type: String, required: true },
+  frontText: { type: String, required: true, unique: true },
   backText: { type: String, required: true }
 });
 
