@@ -61,8 +61,8 @@ export class AchievementUpdater {
   };
 
   public updateVeteran = (): void => {
-    const currentDateMoment = moment(new Date());
-    const userRegistrationMoment = moment(this.user.registrationDate);
+    const currentDateMoment = moment(new Date()).startOf("day");
+    const userRegistrationMoment = moment(this.user.registrationDate).startOf("day");
     const newProgress = currentDateMoment.diff(userRegistrationMoment, "days");
 
     if (newProgress > this.user.achievements.veteran.currentProgress) {
