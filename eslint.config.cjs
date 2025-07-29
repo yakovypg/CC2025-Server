@@ -18,7 +18,11 @@ module.exports = defineConfig([
   {
     languageOptions: {
       globals: {},
-      parser: tsParser
+      parser: tsParser,
+      parserOptions: {
+        project: "./tsconfig.json",
+        tsconfigRootDir: __dirname
+      }
     },
 
     extends: fixupConfigRules(
@@ -54,6 +58,49 @@ module.exports = defineConfig([
             order: "asc",
             caseInsensitive: true
           }
+        }
+      ],
+      "@typescript-eslint/naming-convention": [
+        "error",
+        {
+          selector: [
+            "classProperty",
+            "objectLiteralProperty",
+            "typeProperty",
+            "classMethod",
+            "objectLiteralMethod",
+            "typeMethod",
+            "accessor",
+            "enumMember"
+          ],
+          format: null,
+          modifiers: ["requiresQuotes"]
+        },
+        {
+          selector: "typeLike",
+          format: ["StrictPascalCase"],
+          leadingUnderscore: "allow",
+          trailingUnderscore: "allow"
+        },
+        {
+          selector: "variable",
+          types: ["function"],
+          format: ["StrictPascalCase", "strictCamelCase"]
+        },
+        {
+          selector: "variable",
+          modifiers: ["exported"],
+          format: ["UPPER_CASE"]
+        },
+        {
+          selector: ["variable", "property", "parameter", "function", "method"],
+          format: ["strictCamelCase"],
+          leadingUnderscore: "allow",
+          trailingUnderscore: "allow"
+        },
+        {
+          selector: "enumMember",
+          format: ["UPPER_CASE"]
         }
       ]
     },
