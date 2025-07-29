@@ -34,6 +34,8 @@ The easiest way to start the server is presented in the following steps:
 
 After these steps, the server should be available on your host at port `8080`.
 
+If you are running a server not on `localhost` and plan to use it with a VK mini application, please note that the server must be operated over HTTPS. In this context, it is advisable to review the notes regarding the use of HTTPS in the relevant [section](docs/Development.md#https) of our documentation.
+
 ## Documentation
 
 You can read our documentation in the [DOCUMENTATION.md](DOCUMENTATION.md).

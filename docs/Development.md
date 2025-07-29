@@ -8,6 +8,7 @@ This document provides useful information for developers to enhance the project.
      *    [Build](#build)
      *    [Test](#test)
      *    [Start](#start)
+*    [HTTPS](#https)
 *    [Scripts](#scripts)
 *    [Change Initial Cards](#change-initial-cards)
 *    [VS Code Configuration](#vs-code-configuration)
@@ -59,6 +60,12 @@ You can also use the `serve` script to run the built files, as shown in the comm
 ```bash
 yarn serve
 ```
+
+## HTTPS
+
+If you are running a server not on `localhost` and plan to use it with a VK mini application, please note that the server must be operated over HTTPS.
+
+It should be noted that, by default, the server configuration script generates a self-signed certificate for HTTPS. This certificate allows you to test the server's functionality locally by disabling certificate verification in the browser or by adding the generated certificate to the trusted list. However, a self-signed certificate is not suitable for production use. Instead, you should purchase a domain name, obtain a certificate for it, and provide it to the server by placing the `.key` and `.cert` files in the `certificates` folder. This ensures that your server operates securely and is trusted by clients accessing it over HTTPS.
 
 ## Scripts
 
