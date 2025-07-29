@@ -1,8 +1,5 @@
-import { HttpsConfig } from ".";
-
 export interface ServerConfig {
-  port: number;
   host: string;
+  port: number;
   useHttps: boolean;
-  httpsConfig: HttpsConfig;
 }

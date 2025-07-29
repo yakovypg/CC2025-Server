@@ -5,7 +5,13 @@ import express, { Express } from "express";
 
 import { errorHandler } from "../api/middlewares";
 import { cardRoutes, userRoutes } from "../api/routes";
-import { HttpsConfig, ServerConfig } from "../configuration";
+import {
+  HttpsConfig,
+  HttpsServerConfig,
+  HttpsServerConfigImpl,
+  ServerConfig,
+  ServerConfigImpl
+} from "../configuration";
 
 export const loadHttpsConfig = (): HttpsConfig | null => {
   const httpsKeyPath = process.env.HTTPS_KEY_PATH;
@@ -25,22 +31,24 @@ export const loadHttpsConfig = (): HttpsConfig | null => {
   }
 };
 
-export const loadServerConfig = (): ServerConfig | null => {
+export const loadServerConfig = (): HttpsServerConfig | ServerConfig | null => {
   const port = Number(process.env.PORT);
   const host = process.env.HOST;
   const useHttps = process.env.USE_HTTPS === "1";
-  const httpsConfig = loadHttpsConfig();
 
-  if (Number.isNaN(port) || !host || !httpsConfig) {
+  if (Number.isNaN(port) || host === undefined) {
     return null;
   }
 
-  return {
-    port: port,
-    host: host,
-    useHttps: useHttps,
-    httpsConfig: httpsConfig
-  };
+  if (useHttps) {
+    const httpsConfig = loadHttpsConfig();
+
+    return httpsConfig !== null
+      ? new HttpsServerConfigImpl(host, port, useHttps, httpsConfig)
+      : null;
+  }
+
+  return new ServerConfigImpl(host, port, useHttps);
 };
 
 export const configureApp = (app: Express): void => {
