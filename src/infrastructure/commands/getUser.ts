@@ -5,7 +5,7 @@ import { logger } from "../loggers";
 
 const getUser = async (userVkId: number, repository: UserRepository): Promise<User> => {
   logger.info({ userVkId }, "Trying to get user");
-  const user = await repository.findByVkId(userVkId);
+  const user: User | null = await repository.findByVkId(userVkId);
 
   if (!user) {
     logger.warn({ userVkId }, "User not found");

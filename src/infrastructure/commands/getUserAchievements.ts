@@ -8,7 +8,7 @@ const getUserAchievements = async (
   repository: UserRepository
 ): Promise<Achievements> => {
   logger.info({ userVkId }, "Trying to get user achievements");
-  const achievements = await repository.findAchievements(userVkId);
+  const achievements: Achievements | null = await repository.findAchievements(userVkId);
 
   if (!achievements) {
     logger.warn({ userVkId }, "User not found");

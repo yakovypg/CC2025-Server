@@ -14,7 +14,7 @@ export const errorHandler = async (
   _req: Request,
   res: Response,
   _next: NextFunction // eslint-disable-line @typescript-eslint/no-unused-vars
-) => {
+): Promise<void> => {
   logger.error({ err: error });
 
   if (error instanceof NotFoundError) {

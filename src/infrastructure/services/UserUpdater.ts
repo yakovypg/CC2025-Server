@@ -10,29 +10,29 @@ export class UserUpdater {
   }
 
   private updateStrikeCounterStatistics = (): void => {
-    const currentDate = new Date();
-    const lastResultDate = this.user.lastResultDate;
+    const currentDate: Date = new Date();
+    const lastResultDate: Date = this.user.lastResultDate;
 
     if (isEqualWithoutRegardToTime(currentDate, lastResultDate)) {
       return;
     }
 
-    const stillInStrike = isWithinOneDay(currentDate, lastResultDate);
+    const stillInStrike: boolean = isWithinOneDay(currentDate, lastResultDate);
 
     this.user.statistics.strikeCounter = stillInStrike ? this.user.statistics.strikeCounter + 1 : 0;
   };
 
   private updateAnswerStatistics = (answers: Answer[]): void => {
-    const correctAnswers = answers.filter((t) => t.isCorrect).length;
+    const correctAnswers: number = answers.filter((t: Answer) => t.isCorrect).length;
     this.user.statistics.correctAnswers += correctAnswers;
 
-    const incorrectAnswers = answers.filter((t) => !t.isCorrect).length;
+    const incorrectAnswers: number = answers.filter((t: Answer) => !t.isCorrect).length;
     this.user.statistics.incorrectAnswers += incorrectAnswers;
   };
 
   private updateSeriesStatistics = (answers: Answer[]): void => {
-    let currentSeries = this.user.statistics.currentSeries;
-    let bestSeries = this.user.statistics.bestSeries;
+    let currentSeries: number = this.user.statistics.currentSeries;
+    let bestSeries: number = this.user.statistics.bestSeries;
 
     answers.forEach((answer: Answer) => {
       if (!answer.isCorrect) {
@@ -58,7 +58,7 @@ export class UserUpdater {
   };
 
   public updateAchievements = (): void => {
-    const achievementUpdater = new AchievementUpdater(this.user);
+    const achievementUpdater: AchievementUpdater = new AchievementUpdater(this.user);
     achievementUpdater.updateAll();
   };
 

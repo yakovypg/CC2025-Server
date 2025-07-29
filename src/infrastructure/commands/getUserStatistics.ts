@@ -8,7 +8,7 @@ const getUserStatistics = async (
   repository: UserRepository
 ): Promise<Statistics> => {
   logger.info({ userVkId }, "Trying to get user statistics");
-  const statistics = await repository.findStatistics(userVkId);
+  const statistics: Statistics | null = await repository.findStatistics(userVkId);
 
   if (!statistics) {
     logger.warn({ userVkId }, "User not found");

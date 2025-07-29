@@ -1,5 +1,5 @@
 import { UserRepository } from "../../infrastructure/data/repositories";
-import { Achievements } from "../../models";
+import { Achievements, User } from "../../models";
 import { UserNotFoundError } from "../errors";
 import { logger } from "../loggers";
 
@@ -9,7 +9,7 @@ const updateUserAchievements = async (
   repository: UserRepository
 ): Promise<Achievements> => {
   logger.info({ userVkId, achievements }, "Trying to update user achievements");
-  const user = await repository.updateAchievements(userVkId, achievements);
+  const user: User | null = await repository.updateAchievements(userVkId, achievements);
 
   if (!user) {
     logger.warn({ userVkId }, "User not found");

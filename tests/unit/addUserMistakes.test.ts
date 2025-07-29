@@ -6,8 +6,8 @@ import { UserNotFoundError } from "../../src/infrastructure/errors";
 import { AchievementsImpl, StatisticsImpl, User } from "../../src/models";
 
 describe("addUserMistakes", () => {
-  const userVkId = 1;
-  const mistakeIds = [1, 3, 3, 5, 5, 6];
+  const userVkId: number = 1;
+  const mistakeIds: number[] = [1, 3, 3, 5, 5, 6];
 
   const mockRepository: Partial<UserRepository> = {
     findByVkId: jest.fn(),
@@ -32,10 +32,12 @@ describe("addUserMistakes", () => {
   });
 
   it("should add mistakes to the user without duplicates", async () => {
-    (mockRepository.addMistakes as jest.Mock).mockImplementation(async (_vkId, newMistakes) => {
-      user.mistakeIds = Array.from(new Set([...user.mistakeIds, ...newMistakes]));
-      return true;
-    });
+    (mockRepository.addMistakes as jest.Mock).mockImplementation(
+      async (_vkId: number, newMistakes: number[]) => {
+        user.mistakeIds = Array.from(new Set([...user.mistakeIds, ...newMistakes]));
+        return true;
+      }
+    );
 
     await addUserMistakes(userVkId, mistakeIds, mockRepository as UserRepository);
 

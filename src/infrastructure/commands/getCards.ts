@@ -9,7 +9,9 @@ const getCards = async (
   cardsCount: number | null | undefined = null
 ): Promise<Card[]> => {
   logger.info({ cardIds, cardsCount }, "Trying to get cards");
-  const cards = cardIds ? await repository.findByIds(cardIds) : await repository.findAll();
+  const cards: Card[] | null = cardIds
+    ? await repository.findByIds(cardIds)
+    : await repository.findAll();
 
   logger.info(
     { cardIds, cardsCount, numberOfCards: cards?.length },

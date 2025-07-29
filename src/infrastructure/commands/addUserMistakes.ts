@@ -8,7 +8,7 @@ const addUserMistakes = async (
   repository: UserRepository
 ): Promise<void> => {
   logger.info({ userVkId, mistakeIds }, "Trying to add mistakes to the user");
-  const mistakesAdded = await repository.addMistakes(userVkId, mistakeIds);
+  const mistakesAdded: boolean = await repository.addMistakes(userVkId, mistakeIds);
 
   if (!mistakesAdded) {
     logger.warn({ userVkId }, "User not found");

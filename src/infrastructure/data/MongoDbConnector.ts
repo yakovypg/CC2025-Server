@@ -18,7 +18,7 @@ import { logger } from "../loggers";
 
 export class MongoDbConnector implements DatabaseConnector {
   public connect = async (): Promise<void> => {
-    const connectionUrl = process.env.MONGODB_URI ?? "";
+    const connectionUrl: string = process.env.MONGODB_URI ?? "";
 
     try {
       logger.info("Trying to connect to MongoDB");

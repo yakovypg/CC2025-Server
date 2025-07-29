@@ -13,8 +13,8 @@ jest.mock("../../src/infrastructure/data/repositories", () => {
     __esModule: true,
     cardRepository: {
       findAll: jest.fn().mockResolvedValue(cards),
-      findById: jest.fn(async (id) => cards.find((c) => c.id === id) ?? null),
-      findByIds: jest.fn(async (ids) => cards.filter((c) => ids.includes(c.id)))
+      findById: jest.fn(async (id: number) => cards.find((c: Card) => c.id === id) ?? null),
+      findByIds: jest.fn(async (ids: number[]) => cards.filter((c: Card) => ids.includes(c.id)))
     }
   };
 });
@@ -27,7 +27,7 @@ import { Card } from "../../src/models";
 import { configureApp } from "../../src/utils";
 
 function createApp(): Application {
-  const app = express();
+  const app: express.Express = express();
   configureApp(app);
 
   return app;
@@ -41,6 +41,7 @@ describe("CardController Integration", () => {
   });
 
   it("GET /api/card - without params should return all cards", async () => {
+    // eslint-disable-next-line @typescript-eslint/typedef
     const res = await request(app)
       .get("/api/card")
       .expect("Content-Type", /json/)
@@ -48,13 +49,14 @@ describe("CardController Integration", () => {
 
     expect(Array.isArray(res.body)).toBe(true);
 
-    const actualCardIds = res.body.map((t: Card) => t.id).sort();
-    const expectedCardIds = cards.map((t) => t.id);
+    const actualCardIds: number[] = res.body.map((t: Card) => t.id).sort();
+    const expectedCardIds: number[] = cards.map((t: Card) => t.id);
 
     expect(actualCardIds).toEqual(expectedCardIds);
   });
 
   it("GET /api/card - with cardIds param should return specified cards", async () => {
+    // eslint-disable-next-line @typescript-eslint/typedef
     const res = await request(app)
       .get("/api/card")
       .query({ cardIds: ["1", "2", "3"] })
@@ -63,13 +65,14 @@ describe("CardController Integration", () => {
 
     expect(Array.isArray(res.body)).toBe(true);
 
-    const actualCardIds = res.body.map((t: Card) => t.id).sort();
-    const expectedCardIds = [1, 2, 3];
+    const actualCardIds: number[] = res.body.map((t: Card) => t.id).sort();
+    const expectedCardIds: number[] = [1, 2, 3];
 
     expect(actualCardIds).toEqual(expectedCardIds);
   });
 
   it("GET /api/card - with cardsCount param should return specified number of cards", async () => {
+    // eslint-disable-next-line @typescript-eslint/typedef
     const res = await request(app)
       .get("/api/card")
       .query({ cardsCount: 2 })
@@ -78,8 +81,8 @@ describe("CardController Integration", () => {
 
     expect(Array.isArray(res.body)).toBe(true);
 
-    const actualCardIds = res.body.map((t: Card) => t.id);
-    const expectedCardIdsLength = 2;
+    const actualCardIds: number[] = res.body.map((t: Card) => t.id);
+    const expectedCardIdsLength: number = 2;
 
     expect(actualCardIds.length).toBe(expectedCardIdsLength);
   });

@@ -11,20 +11,22 @@ const addUserAnswers = async (
   repository: UserRepository
 ): Promise<User> => {
   logger.info({ userVkId, answers }, "Trying to add answers to the user");
-  const user = await repository.findByVkId(userVkId);
+  const user: User | null = await repository.findByVkId(userVkId);
 
   if (!user) {
     logger.warn({ userVkId }, "User not found");
     throw new UserNotFoundError();
   }
 
-  const mistakeIds = answers.filter((t) => !t.isCorrect).map((t) => t.cardId);
+  const mistakeIds: number[] = answers
+    .filter((t: Answer) => !t.isCorrect)
+    .map((t: Answer) => t.cardId);
   await addUserMistakes(userVkId, mistakeIds, repository);
 
-  const userUpdater = new UserUpdater(user);
+  const userUpdater: UserUpdater = new UserUpdater(user);
   userUpdater.updateAll(answers);
 
-  const updatedUser = await userUpdater.saveChanges();
+  const updatedUser: User = await userUpdater.saveChanges();
   logger.info({ userVkId, answers }, "Answers added to the user");
 
   return updatedUser;

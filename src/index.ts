@@ -7,13 +7,13 @@ if (process.env.IS_DEBUG) {
   dotenv.config({ path: ".env.development" });
 }
 
-import { isHttpsServerConfig } from "./configuration";
+import { HttpsServerConfig, isHttpsServerConfig, ServerConfig } from "./configuration";
 import { databaseConnector } from "./infrastructure/data";
 import { logger } from "./infrastructure/loggers";
 import { configureApp, loadServerConfig } from "./utils";
 
 async function main() {
-  const config = loadServerConfig();
+  const config: HttpsServerConfig | ServerConfig | null = loadServerConfig();
 
   if (config === null) {
     logger.warn("Bad configuration");
@@ -23,7 +23,7 @@ async function main() {
   await databaseConnector.connect();
   await databaseConnector.initialize();
 
-  const app = express();
+  const app: express.Express = express();
   configureApp(app);
 
   if (isHttpsServerConfig(config)) {

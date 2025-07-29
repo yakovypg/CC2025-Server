@@ -12,20 +12,20 @@ export const parseArray = (data: unknown): unknown[] | null => {
 };
 
 export const parseNumberArray = (data: unknown): number[] | null => {
-  const arr = parseArray(data);
+  const arr: unknown[] | null = parseArray(data);
 
   if (!arr) {
     return null;
   }
 
-  const mappedArr = arr.map((t) => Number(t));
-  const isMappedArrCorrect = mappedArr.every((t) => !Number.isNaN(t));
+  const mappedArr: number[] = arr.map((t: unknown) => Number(t));
+  const isMappedArrCorrect: boolean = mappedArr.every((t: number) => !Number.isNaN(t));
 
   return isMappedArrCorrect ? mappedArr : null;
 };
 
 export const parseAnswerArray = (data: unknown): Answer[] | null => {
-  const arr = parseArray(data);
+  const arr: unknown[] | null = parseArray(data);
 
   if (!arr) {
     return null;
@@ -41,18 +41,25 @@ export const parseAnswerArray = (data: unknown): Answer[] | null => {
     );
   }
 
-  const isArrCorrect = arr.every(isAnswer);
+  const isArrCorrect: boolean = arr.every(isAnswer);
 
   if (!isArrCorrect) {
     return null;
   }
 
-  const mappedArr: Answer[] = arr.map((t) => ({
-    cardId: Number(t.cardId),
-    isCorrect: Boolean(Number(t.isCorrect))
-  }));
+  const mappedArr: Answer[] = arr.map((t: unknown) =>
+    isAnswer(t)
+      ? {
+          cardId: Number(t.cardId),
+          isCorrect: Boolean(Number(t.isCorrect))
+        }
+      : {
+          cardId: -1,
+          isCorrect: false
+        }
+  );
 
-  const isMappedArrCorrect = mappedArr.every((t) => !Number.isNaN(t.cardId));
+  const isMappedArrCorrect: boolean = mappedArr.every((t: Answer) => !Number.isNaN(t.cardId));
 
   return isMappedArrCorrect ? mappedArr : null;
 };
@@ -62,10 +69,11 @@ export const parseStatistics = (data: unknown): Partial<Statistics> | null => {
     return null;
   }
 
-  const allowedKeys = Object.keys(new StatisticsImpl());
-  const bodyKeys = Object.keys(data);
+  const allowedKeys: string[] = Object.keys(new StatisticsImpl());
+  const bodyKeys: string[] = Object.keys(data);
 
-  const isBodyCorrect = bodyKeys.length > 0 && bodyKeys.every((key) => allowedKeys.includes(key));
+  const isBodyCorrect: boolean =
+    bodyKeys.length > 0 && bodyKeys.every((key: string) => allowedKeys.includes(key));
 
   if (!isBodyCorrect) {
     return null;
@@ -79,19 +87,19 @@ export const parseAchievements = (data: unknown): Partial<Achievements> | null =
     return null;
   }
 
-  const allowedKeys = Object.keys(new AchievementsImpl());
-  const allowedAchievementKeys = Object.keys(new AchievementImpl());
+  const allowedKeys: string[] = Object.keys(new AchievementsImpl());
+  const allowedAchievementKeys: string[] = Object.keys(new AchievementImpl());
 
-  const body = data as Record<string, unknown>;
-  const bodyKeys = Object.keys(body);
+  const body: Record<string, unknown> = data as Record<string, unknown>;
+  const bodyKeys: string[] = Object.keys(body);
 
-  const isBodyCorrect =
+  const isBodyCorrect: boolean =
     bodyKeys.length > 0 &&
     bodyKeys.every(
-      (key) =>
+      (key: string) =>
         allowedKeys.includes(key) &&
         body[key] &&
-        Object.keys(body[key]).every((subkey) => allowedAchievementKeys.includes(subkey))
+        Object.keys(body[key]).every((subkey: string) => allowedAchievementKeys.includes(subkey))
     );
 
   if (!isBodyCorrect) {

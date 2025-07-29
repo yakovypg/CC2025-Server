@@ -37,7 +37,7 @@ export class AchievementUpdater {
   };
 
   public updateDaysInStrike = (): void => {
-    const newProgress = this.user.statistics.strikeCounter;
+    const newProgress: number = this.user.statistics.strikeCounter;
 
     if (newProgress > this.user.achievements.daysInStrike.currentProgress) {
       this.updateAchievement(this.user.achievements.daysInStrike, newProgress);
@@ -45,7 +45,7 @@ export class AchievementUpdater {
   };
 
   public updateRightAnswers = (): void => {
-    const newProgress = this.user.statistics.correctAnswers;
+    const newProgress: number = this.user.statistics.correctAnswers;
 
     if (newProgress > this.user.achievements.rightAnswers.currentProgress) {
       this.updateAchievement(this.user.achievements.rightAnswers, newProgress);
@@ -53,7 +53,7 @@ export class AchievementUpdater {
   };
 
   public updatePerfectSeries = (): void => {
-    const newProgress = this.user.statistics.bestSeries;
+    const newProgress: number = this.user.statistics.bestSeries;
 
     if (newProgress > this.user.achievements.perfectSeries.currentProgress) {
       this.updateAchievement(this.user.achievements.perfectSeries, newProgress);
@@ -61,9 +61,9 @@ export class AchievementUpdater {
   };
 
   public updateVeteran = (): void => {
-    const currentDateMoment = moment(new Date()).startOf("day");
-    const userRegistrationMoment = moment(this.user.registrationDate).startOf("day");
-    const newProgress = currentDateMoment.diff(userRegistrationMoment, "days");
+    const currentDateMoment: moment.Moment = moment(new Date()).startOf("day");
+    const userRegistrationMoment: moment.Moment = moment(this.user.registrationDate).startOf("day");
+    const newProgress: number = currentDateMoment.diff(userRegistrationMoment, "days");
 
     if (newProgress > this.user.achievements.veteran.currentProgress) {
       this.updateAchievement(this.user.achievements.veteran, newProgress);

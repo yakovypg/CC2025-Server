@@ -6,7 +6,7 @@ import { UserNotFoundError } from "../../src/infrastructure/errors";
 import { AchievementsImpl, Answer, StatisticsImpl, User } from "../../src/models";
 
 describe("addUserAnswers", () => {
-  const userVkId = 1;
+  const userVkId: number = 1;
 
   const answers: Answer[] = [
     { cardId: 1, isCorrect: true },
@@ -42,7 +42,7 @@ describe("addUserAnswers", () => {
   it("should add answers to the user and update statistics and achievements", async () => {
     (mockRepository.addMistakes as jest.Mock).mockResolvedValue(true);
 
-    const result = await addUserAnswers(userVkId, answers, mockRepository as UserRepository);
+    const result: User = await addUserAnswers(userVkId, answers, mockRepository as UserRepository);
 
     expect(result).toBe(user);
 

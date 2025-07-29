@@ -8,7 +8,7 @@ const deleteUserMistakes = async (
   repository: UserRepository
 ): Promise<void> => {
   logger.info({ userVkId, mistakeIds }, "Trying to delete user mistakes");
-  const mistakesDeleted = await repository.deleteMistakes(userVkId, mistakeIds);
+  const mistakesDeleted: boolean = await repository.deleteMistakes(userVkId, mistakeIds);
 
   if (!mistakesDeleted) {
     logger.warn({ userVkId }, "User not found");

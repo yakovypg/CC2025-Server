@@ -4,7 +4,7 @@ import { logger } from "../loggers";
 
 const getUserMistakes = async (userVkId: number, repository: UserRepository): Promise<number[]> => {
   logger.info({ userVkId }, "Trying to get user mistakes");
-  const mistakeIds = await repository.findMistakes(userVkId);
+  const mistakeIds: number[] | null = await repository.findMistakes(userVkId);
 
   if (!mistakeIds) {
     logger.warn({ userVkId }, "User not found");

@@ -4,8 +4,8 @@ import asyncHandler from "express-async-handler";
 import { userRepository } from "../../infrastructure/data/repositories";
 import { UserController } from "../controllers";
 
-const router = Router();
-const userController = new UserController(userRepository);
+const router: Router = Router();
+const userController: UserController = new UserController(userRepository);
 
 router.post("/", asyncHandler(userController.addUser));
 router.get("/:id", asyncHandler(userController.getUser));

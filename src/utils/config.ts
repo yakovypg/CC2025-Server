@@ -14,8 +14,8 @@ import {
 } from "../configuration";
 
 export const loadHttpsConfig = (): HttpsConfig | null => {
-  const httpsKeyPath = process.env.HTTPS_KEY_PATH;
-  const httpsCertPath = process.env.HTTPS_CERT_PATH;
+  const httpsKeyPath: string | undefined = process.env.HTTPS_KEY_PATH;
+  const httpsCertPath: string | undefined = process.env.HTTPS_CERT_PATH;
 
   if (!httpsKeyPath || !httpsCertPath) {
     return null;
@@ -32,16 +32,16 @@ export const loadHttpsConfig = (): HttpsConfig | null => {
 };
 
 export const loadServerConfig = (): HttpsServerConfig | ServerConfig | null => {
-  const port = Number(process.env.PORT);
-  const host = process.env.HOST;
-  const useHttps = process.env.USE_HTTPS === "1";
+  const port: number = Number(process.env.PORT);
+  const host: string | undefined = process.env.HOST;
+  const useHttps: boolean = process.env.USE_HTTPS === "1";
 
   if (Number.isNaN(port) || host === undefined) {
     return null;
   }
 
   if (useHttps) {
-    const httpsConfig = loadHttpsConfig();
+    const httpsConfig: HttpsConfig | null = loadHttpsConfig();
 
     return httpsConfig !== null
       ? new HttpsServerConfigImpl(host, port, useHttps, httpsConfig)
