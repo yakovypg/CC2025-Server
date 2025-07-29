@@ -14,7 +14,7 @@ export {
   ACHIEVEMENTS_MODEL_NAME as AchievementsModelName
 } from "./AchievementsMongo";
 
-export { Answer } from "./Answer";
+export { Answer, isAnswer } from "./Answer";
 export { Card } from "./Card";
 export {
   CardDocument,

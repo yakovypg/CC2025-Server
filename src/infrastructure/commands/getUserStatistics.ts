@@ -10,7 +10,7 @@ const getUserStatistics = async (
   LOGGER.info({ userVkId }, "Trying to get user statistics");
   const statistics: Statistics | null = await repository.findStatistics(userVkId);
 
-  if (!statistics) {
+  if (statistics === null) {
     LOGGER.warn({ userVkId }, "User not found");
     throw new UserNotFoundError();
   }

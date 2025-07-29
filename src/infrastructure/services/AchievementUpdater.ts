@@ -28,7 +28,7 @@ export class AchievementUpdater {
       achievement.nextLevelProgress *= AchievementUpdater.nextLevelMultiplyingFactor;
       achievement.level++;
 
-      if (achievement.level == AchievementUpdater.maxLevel) {
+      if (achievement.level === AchievementUpdater.maxLevel) {
         achievement.currentProgress = achievement.nextLevelProgress;
         achievement.hasMaxLevel = true;
         break;

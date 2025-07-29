@@ -4,7 +4,8 @@ import {
   AchievementsImpl,
   Answer,
   Statistics,
-  StatisticsImpl
+  StatisticsImpl,
+  isAnswer
 } from "../models";
 
 export const parseArray = (data: unknown): unknown[] | null => {
@@ -14,7 +15,7 @@ export const parseArray = (data: unknown): unknown[] | null => {
 export const parseNumberArray = (data: unknown): number[] | null => {
   const arr: unknown[] | null = parseArray(data);
 
-  if (!arr) {
+  if (arr === null) {
     return null;
   }
 
@@ -27,18 +28,8 @@ export const parseNumberArray = (data: unknown): number[] | null => {
 export const parseAnswerArray = (data: unknown): Answer[] | null => {
   const arr: unknown[] | null = parseArray(data);
 
-  if (!arr) {
+  if (arr === null) {
     return null;
-  }
-
-  function isAnswer(obj: unknown): obj is Answer {
-    return (
-      obj !== null &&
-      obj !== undefined &&
-      typeof obj === "object" &&
-      "cardId" in obj &&
-      "isCorrect" in obj
-    );
   }
 
   const isArrCorrect: boolean = arr.every(isAnswer);

@@ -13,7 +13,7 @@ const addUserAnswers = async (
   LOGGER.info({ userVkId, answers }, "Trying to add answers to the user");
   const user: User | null = await repository.findByVkId(userVkId);
 
-  if (!user) {
+  if (user === null) {
     LOGGER.warn({ userVkId }, "User not found");
     throw new UserNotFoundError();
   }

@@ -32,7 +32,7 @@ export class MongoDbUserRepository implements UserRepository {
   ): Promise<UserDocument | null> => {
     const user: UserDocument | null = await this.findByVkId(vkId);
 
-    if (!user) {
+    if (user === null) {
       return null;
     }
 
@@ -51,7 +51,7 @@ export class MongoDbUserRepository implements UserRepository {
   ): Promise<UserDocument | null> => {
     const user: UserDocument | null = await this.findByVkId(vkId);
 
-    if (!user) {
+    if (user === null) {
       return null;
     }
 

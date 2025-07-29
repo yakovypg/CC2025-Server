@@ -11,7 +11,7 @@ const updateUserAchievements = async (
   LOGGER.info({ userVkId, achievements }, "Trying to update user achievements");
   const user: User | null = await repository.updateAchievements(userVkId, achievements);
 
-  if (!user) {
+  if (user === null) {
     LOGGER.warn({ userVkId }, "User not found");
     throw new UserNotFoundError();
   }

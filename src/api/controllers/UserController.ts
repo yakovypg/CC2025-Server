@@ -59,7 +59,7 @@ export class UserController {
     const vkId: number = Number(req.params.id);
     const statistics: Partial<Statistics> | null = parseStatistics(req.body);
 
-    if (!Number.isInteger(vkId) || !statistics) {
+    if (!Number.isInteger(vkId) || statistics === null) {
       answerBadRequest(res);
       return;
     }
@@ -88,7 +88,7 @@ export class UserController {
     const vkId: number = Number(req.params.id);
     const achievements: Partial<Achievements> | null = parseAchievements(req.body);
 
-    if (!Number.isInteger(vkId) || !achievements) {
+    if (!Number.isInteger(vkId) || achievements === null) {
       answerBadRequest(res);
       return;
     }
@@ -117,7 +117,7 @@ export class UserController {
     const vkId: number = Number(req.params.id);
     const mistakeIds: number[] | null = parseNumberArray(req.body);
 
-    if (!Number.isInteger(vkId) || !mistakeIds) {
+    if (!Number.isInteger(vkId) || mistakeIds === null) {
       answerBadRequest(res);
       return;
     }
@@ -130,7 +130,7 @@ export class UserController {
     const vkId: number = Number(req.params.id);
     const mistakeIds: number[] | null = parseNumberArray(req.body);
 
-    if (!Number.isInteger(vkId) || !mistakeIds) {
+    if (!Number.isInteger(vkId) || mistakeIds === null) {
       answerBadRequest(res);
       return;
     }
@@ -155,7 +155,7 @@ export class UserController {
     const vkId: number = Number(req.params.id);
     const answers: Answer[] | null = parseAnswerArray(req.body);
 
-    if (!Number.isInteger(vkId) || !answers) {
+    if (!Number.isInteger(vkId) || answers === null) {
       answerBadRequest(res);
       return;
     }

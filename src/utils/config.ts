@@ -17,7 +17,7 @@ export const loadHttpsConfig = (): HttpsConfig | null => {
   const httpsKeyPath: string | undefined = process.env.HTTPS_KEY_PATH;
   const httpsCertPath: string | undefined = process.env.HTTPS_CERT_PATH;
 
-  if (!httpsKeyPath || !httpsCertPath) {
+  if (httpsKeyPath === undefined || httpsCertPath === undefined) {
     return null;
   }
 

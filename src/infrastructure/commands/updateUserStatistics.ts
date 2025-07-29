@@ -11,7 +11,7 @@ const updateUserStatistics = async (
   LOGGER.info({ userVkId, statistics }, "Trying to update user statistics");
   const user: User | null = await repository.updateStatistics(userVkId, statistics);
 
-  if (!user) {
+  if (user === null) {
     LOGGER.warn({ userVkId }, "User not found");
     throw new UserNotFoundError();
   }

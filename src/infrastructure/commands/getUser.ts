@@ -7,7 +7,7 @@ const getUser = async (userVkId: number, repository: UserRepository): Promise<Us
   LOGGER.info({ userVkId }, "Trying to get user");
   const user: User | null = await repository.findByVkId(userVkId);
 
-  if (!user) {
+  if (user === null) {
     LOGGER.warn({ userVkId }, "User not found");
     throw new UserNotFoundError();
   }

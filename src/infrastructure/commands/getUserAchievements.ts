@@ -10,7 +10,7 @@ const getUserAchievements = async (
   LOGGER.info({ userVkId }, "Trying to get user achievements");
   const achievements: Achievements | null = await repository.findAchievements(userVkId);
 
-  if (!achievements) {
+  if (achievements === null) {
     LOGGER.warn({ userVkId }, "User not found");
     throw new UserNotFoundError();
   }

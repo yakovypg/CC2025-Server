@@ -6,7 +6,7 @@ const getUserMistakes = async (userVkId: number, repository: UserRepository): Pr
   LOGGER.info({ userVkId }, "Trying to get user mistakes");
   const mistakeIds: number[] | null = await repository.findMistakes(userVkId);
 
-  if (!mistakeIds) {
+  if (mistakeIds === null) {
     LOGGER.warn({ userVkId }, "User not found");
     throw new UserNotFoundError();
   }
