@@ -8,31 +8,31 @@ if (process.env.IS_DEBUG) {
 }
 
 import { HttpsServerConfig, isHttpsServerConfig, ServerConfig } from "./configuration";
-import { databaseConnector } from "./infrastructure/data";
-import { logger } from "./infrastructure/loggers";
+import { DATABASE_CONNECTOR } from "./infrastructure/data";
+import { LOGGER } from "./infrastructure/loggers";
 import { configureApp, loadServerConfig } from "./utils";
 
 async function main() {
   const config: HttpsServerConfig | ServerConfig | null = loadServerConfig();
 
   if (config === null) {
-    logger.warn("Bad configuration");
+    LOGGER.warn("Bad configuration");
     process.exit(1);
   }
 
-  await databaseConnector.connect();
-  await databaseConnector.initialize();
+  await DATABASE_CONNECTOR.connect();
+  await DATABASE_CONNECTOR.initialize();
 
   const app: express.Express = express();
   configureApp(app);
 
   if (isHttpsServerConfig(config)) {
     https.createServer(config.httpsConfig, app).listen(config.port, config.host, () => {
-      logger.info(`Server is running on https://${config.host}:${config.port}`);
+      LOGGER.info(`Server is running on https://${config.host}:${config.port}`);
     });
   } else {
     app.listen(config.port, config.host, () => {
-      logger.info(`Server is running on http://${config.host}:${config.port}`);
+      LOGGER.info(`Server is running on http://${config.host}:${config.port}`);
     });
   }
 }

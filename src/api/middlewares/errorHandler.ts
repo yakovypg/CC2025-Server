@@ -7,7 +7,7 @@ import {
   NotSupportedError,
   UserExistsError
 } from "../../infrastructure/errors";
-import { logger } from "../../infrastructure/loggers";
+import { LOGGER } from "../../infrastructure/loggers";
 
 export const errorHandler = async (
   error: unknown,
@@ -15,7 +15,7 @@ export const errorHandler = async (
   res: Response,
   _next: NextFunction // eslint-disable-line @typescript-eslint/no-unused-vars
 ): Promise<void> => {
-  logger.error({ err: error });
+  LOGGER.error({ err: error });
 
   if (error instanceof NotFoundError) {
     res.status(StatusCode.ClientErrorNotFound).json(error.message ?? "Not found");

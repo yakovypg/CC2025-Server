@@ -1,4 +1,4 @@
-export const logger: unknown = {
+export const LOGGER: unknown = {
   info: (): void => {},
   warn: (): void => {},
   error: (): void => {},

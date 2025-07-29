@@ -1,1 +1,1 @@
-export { default as logger } from "./seqLogger";
+export { default as LOGGER } from "./seqLogger";

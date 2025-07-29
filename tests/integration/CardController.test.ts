@@ -8,16 +8,18 @@ const cards: Card[] = [
   { id: 5, frontText: "frontText5", backText: "backText5" }
 ];
 
+/* eslint-disable @typescript-eslint/naming-convention */
 jest.mock("../../src/infrastructure/data/repositories", () => {
   return {
     __esModule: true,
-    cardRepository: {
+    CARD_REPOSITORY: {
       findAll: jest.fn().mockResolvedValue(cards),
       findById: jest.fn(async (id: number) => cards.find((c: Card) => c.id === id) ?? null),
       findByIds: jest.fn(async (ids: number[]) => cards.filter((c: Card) => ids.includes(c.id)))
     }
   };
 });
+/* eslint-enable @typescript-eslint/naming-convention */
 
 import express, { Application } from "express";
 import StatusCode from "status-code-enum";

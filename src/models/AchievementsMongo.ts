@@ -9,7 +9,7 @@ export interface AchievementsDocument extends Achievements, Document {
   veteran: AchievementDocument;
 }
 
-export const AchievementsSchema: Schema = new Schema(
+export const ACHIEVEMENTS_SCHEMA: Schema = new Schema(
   {
     id: { type: Number, required: true, unique: true },
     daysInStrike: { type: AchievementSchema, required: true },
@@ -20,4 +20,4 @@ export const AchievementsSchema: Schema = new Schema(
   { _id: false }
 );
 
-export const AchievementsModelName: string = "Achievements";
+export const ACHIEVEMENTS_MODEL_NAME: string = "Achievements";

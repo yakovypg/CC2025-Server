@@ -4,7 +4,7 @@ import { Achievement } from "./";
 
 export interface AchievementDocument extends Achievement, Document {}
 
-export const AchievementSchema: Schema = new Schema(
+export const ACHIEVEMENT_SCHEMA: Schema = new Schema(
   {
     id: { type: Number, required: true, unique: true },
     currentProgress: { type: Number, required: true },
@@ -15,4 +15,4 @@ export const AchievementSchema: Schema = new Schema(
   { _id: false }
 );
 
-export const AchievementModelName: string = "Achievement";
+export const ACHIEVEMENT_MODEL_NAME: string = "Achievement";

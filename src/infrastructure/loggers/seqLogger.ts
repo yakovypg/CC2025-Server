@@ -26,5 +26,5 @@ const createSeqLogger = (): Logger => {
   return pino(loggerOptions, seqStream);
 };
 
-const logger: Logger = createSeqLogger();
-export default logger;
+const LOGGER: Logger = createSeqLogger();
+export default LOGGER;

@@ -3,8 +3,8 @@ import { MongoDbCardRepository } from "./MongoDbCardRepository";
 import { MongoDbUserRepository } from "./MongoDbUserRepository";
 import { UserRepository } from "./UserRepository";
 
-export const userRepository: UserRepository = new MongoDbUserRepository();
+export const USER_REPOSITORY: UserRepository = new MongoDbUserRepository();
 export type { UserRepository };
 
-export const cardRepository: CardRepository = new MongoDbCardRepository();
+export const CARD_REPOSITORY: CardRepository = new MongoDbCardRepository();
 export type { CardRepository };

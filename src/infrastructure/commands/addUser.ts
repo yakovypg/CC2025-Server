@@ -2,19 +2,19 @@ import { checkUserExists } from "./";
 import { UserRepository } from "../../infrastructure/data/repositories";
 import { User } from "../../models";
 import { UserExistsError } from "../errors";
-import { logger } from "../loggers";
+import { LOGGER } from "../loggers";
 
 const addUser = async (userVkId: number, repository: UserRepository): Promise<User> => {
-  logger.info({ userVkId }, "Trying to add user");
+  LOGGER.info({ userVkId }, "Trying to add user");
   const userExists: boolean = await checkUserExists(userVkId, repository);
 
   if (userExists) {
-    logger.warn({ userVkId }, "User already exists");
+    LOGGER.warn({ userVkId }, "User already exists");
     throw new UserExistsError();
   }
 
   const user: User | null = await repository.addUser(userVkId);
-  logger.info({ userVkId }, "User added");
+  LOGGER.info({ userVkId }, "User added");
 
   return user;
 };

@@ -15,7 +15,7 @@ export interface UserDocument extends User, Document {
   save(...args: unknown[]): Promise<this>;
 }
 
-export const UserSchema: Schema = new Schema({
+export const USER_SCHEMA: Schema = new Schema({
   vkId: { type: Number, required: true, unique: true },
   statistics: { type: StatisticsSchema, required: true },
   achievements: { type: AchievementsSchema, required: true },
@@ -24,9 +24,10 @@ export const UserSchema: Schema = new Schema({
   registrationDate: { type: Date, required: true }
 });
 
-export const UserModelName: string = "User";
+export const USER_MODEL_NAME: string = "User";
 
+// eslint-disable-next-line @typescript-eslint/naming-convention
 export const UserModel: Model<UserDocument> = mongoose.model<UserDocument>(
-  UserModelName,
-  UserSchema
+  USER_MODEL_NAME,
+  USER_SCHEMA
 );

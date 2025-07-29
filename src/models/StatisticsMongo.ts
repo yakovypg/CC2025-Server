@@ -4,7 +4,7 @@ import { Statistics } from "./";
 
 export interface StatisticsDocument extends Statistics, Document {}
 
-export const StatisticsSchema: Schema = new Schema(
+export const STATISTICS_SCHEMA: Schema = new Schema(
   {
     id: { type: Number, required: true, unique: true },
     correctAnswers: { type: Number, required: true },
@@ -16,4 +16,4 @@ export const StatisticsSchema: Schema = new Schema(
   { _id: false }
 );
 
-export const StatisticsModelName: string = "Statistics";
+export const STATISTICS_MODEL_NAME: string = "Statistics";
