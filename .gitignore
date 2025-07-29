@@ -1,8 +1,7 @@
 .vscode
 
-.env
-.env-development
-.env-production
+.env*
+!.env*template*
 
 dist
 node_modules

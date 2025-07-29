@@ -9,7 +9,7 @@ services:
     container_name: CC2025Server
     restart: on-failure
     env_file:
-      - .env-production
+      - .env.production
     ports:
       - 8080:8080
     depends_on:

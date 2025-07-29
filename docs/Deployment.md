@@ -12,7 +12,7 @@ This document provides instructions for deploying the application in a productio
 
 ## Environment Variables
 
-Before you start deploying, create a `.env-production` or `.env-development` file using the provided templates, depending on whether you are deploying in a production or development environment
+Before you start deploying, create a `.env.production` or `.env.development` file using the provided templates, depending on whether you are deploying in a production or development environment
 
 ## Certificates
 
@@ -20,13 +20,13 @@ The server is running over HTTPS, so you need to create certificates for it to f
 
 ## Docker
 
-We assume that the following commands are used to test a production-ready server; therefore, `.env-production` and `docker-compose-production.yml` are utilized. However, you can easily switch to `.env-development` and `docker-compose-development.yml` for development purposes.
+We assume that the following commands are used to test a production-ready server; therefore, `.env.production` and `docker-compose-production.yml` are utilized. However, you can easily switch to `.env.development` and `docker-compose-development.yml` for development purposes.
 
 ### Start
 You can easily deploy the server using the following command.
 
 ```bash
-docker compose -f docker-compose-production.yml --env-file .env-production up -d --build
+docker compose -f docker-compose-production.yml --env-file .env.production up -d --build
 ```
 
 This command will build the Docker images and start the containers in detached mode. The `--build` flag ensures that the images are rebuilt if there are any changes in the Dockerfile or the application code.

@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 import express from "express";
 
 if (process.env.IS_DEBUG) {
-  dotenv.config({ path: ".env-development" });
+  dotenv.config({ path: ".env.development" });
 }
 
 import { databaseConnector } from "./infrastructure/data";

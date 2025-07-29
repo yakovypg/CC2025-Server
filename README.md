@@ -30,7 +30,7 @@ First, ensure that `openssl`, `sed`, `bash`, `cp`, and `cd` are installed on you
 The easiest way to start the server is presented in the following steps:
 1. Configure the project using `bash ./configure.sh`.
 2. Initialize the packages with `yarn init`.
-3. Build and run the Docker containers using `docker compose -f docker-compose-production.yml --env-file .env-production up -d --build`.
+3. Build and run the Docker containers using `docker compose -f docker-compose-production.yml --env-file .env.production up -d --build`.
 
 After these steps, the server should be available on your host at port `8080`.
 
