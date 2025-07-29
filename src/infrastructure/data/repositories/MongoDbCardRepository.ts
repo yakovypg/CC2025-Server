@@ -1,4 +1,4 @@
-import { CardRepository } from ".";
+import { CardRepository } from "./";
 import { CardDocument, CardModel } from "../../../models";
 
 export class MongoDbCardRepository implements CardRepository {

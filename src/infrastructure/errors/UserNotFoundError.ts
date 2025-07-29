@@ -1,4 +1,4 @@
-import { NotFoundError } from ".";
+import { NotFoundError } from "./";
 
 export default class UserNotFoundError extends NotFoundError {
   constructor(message?: string) {

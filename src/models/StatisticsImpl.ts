@@ -1,4 +1,4 @@
-import { Statistics } from ".";
+import { Statistics } from "./";
 
 export class StatisticsImpl implements Statistics {
   public correctAnswers: number;

@@ -1,4 +1,4 @@
-import { checkUserExists } from ".";
+import { checkUserExists } from "./";
 import { UserRepository } from "../../infrastructure/data/repositories";
 import { User } from "../../models";
 import { UserExistsError } from "../errors";

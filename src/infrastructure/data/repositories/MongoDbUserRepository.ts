@@ -1,4 +1,4 @@
-import { UserRepository } from ".";
+import { UserRepository } from "./";
 import {
   UserModel,
   UserDocument,

@@ -1,4 +1,4 @@
-import { addUserMistakes } from ".";
+import { addUserMistakes } from "./";
 import { UserRepository } from "../../infrastructure/data/repositories";
 import { Answer, User } from "../../models";
 import { UserNotFoundError } from "../errors";

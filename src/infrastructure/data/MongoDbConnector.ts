@@ -1,7 +1,7 @@
 import * as autoIncrement from "@alec016/mongoose-autoincrement";
 import mongoose from "mongoose";
 
-import { DatabaseConnector } from ".";
+import { DatabaseConnector } from "./";
 import {
   StatisticsSchema,
   StatisticsModelName,
