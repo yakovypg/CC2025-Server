@@ -7,17 +7,17 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "start": "yarn start:debug",
+    "start": "yarn start:release",
     "start:debug": "cross-env IS_DEBUG=true NODE_ENV=development ts-node src/index.ts",
     "start:release": "cross-env IS_DEBUG=false NODE_ENV=production ts-node src/index.ts",
-    "build": "yarn build:debug",
+    "build": "yarn build:release",
     "build:debug": "tsc --project tsconfig.debug.json",
     "build:release": "tsc --project tsconfig.release.json",
     "serve": "cross-env IS_DEBUG=false NODE_ENV=production node dist/index.js",
     "test": "jest",
     "format": "yarn format-eslint && yarn format-prettier",
-    "format-eslint": "yarn eslint \"{src,tests}/**/*.{ts,tsx,js,jsx}\" --fix",
-    "format-prettier": "yarn prettier --write \"**/*.{js,ts,tsx,json,css,scss}\""
+    "format-eslint": "yarn eslint --fix \"**/*.{ts,tsx,js,jsx}\"",
+    "format-prettier": "yarn prettier --write \"**/*.{ts,tsx,js,jsx,json,css,scss}\""
   },
   "dependencies": {
     "@alec016/mongoose-autoincrement": "^1.5.4",
