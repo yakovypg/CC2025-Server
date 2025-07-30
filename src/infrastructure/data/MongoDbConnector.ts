@@ -25,7 +25,7 @@ export class MongoDbConnector implements DatabaseConnector {
     const db: string | undefined = process.env.MONGODB_DB;
 
     return `mongodb://${username}:${password}@${host}:${port}/${db}?authSource=admin`;
-  }
+  };
 
   public connect = async (): Promise<void> => {
     const connectionUrl: string = this.getConnectionString();
