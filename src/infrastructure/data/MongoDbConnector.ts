@@ -17,8 +17,18 @@ import {
 import { LOGGER } from "../loggers";
 
 export class MongoDbConnector implements DatabaseConnector {
+  private getConnectionString = (): string => {
+    const username: string | undefined = process.env.MONGODB_USERNAME;
+    const password: string | undefined = process.env.MONGODB_PASSWORD;
+    const host: string | undefined = process.env.MONGODB_HOST;
+    const port: string | undefined = process.env.MONGODB_PORT;
+    const db: string | undefined = process.env.MONGODB_DB;
+
+    return `mongodb://${username}:${password}@${host}:${port}/${db}?authSource=admin`;
+  }
+
   public connect = async (): Promise<void> => {
-    const connectionUrl: string = process.env.MONGODB_URI ?? "";
+    const connectionUrl: string = this.getConnectionString();
 
     try {
       LOGGER.info("Trying to connect to MongoDB");
