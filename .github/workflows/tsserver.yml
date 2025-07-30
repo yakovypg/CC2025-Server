@@ -22,8 +22,14 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
-      - name: Build (release)
-        run: yarn build:release
+      - name: Run ESLint
+        run: yarn eslint "**/*.{ts,tsx,js,jsx}"
+
+      - name: Run Prettier
+        run: yarn prettier --check "**/*.{ts,tsx,js,jsx,json,css,scss}"
+
+      - name: Build
+        run: yarn build
 
       - name: Run tests
         run: yarn test
