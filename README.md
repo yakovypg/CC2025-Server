@@ -7,7 +7,7 @@
   <a href="https://github.com/yakovypg/CC2025-Server/blob/main/LICENSE">
     <img src="https://img.shields.io/badge/License-MIT-darkyellow.svg" alt="license" />
   </a>
-  <img src="https://img.shields.io/badge/Version-1.0.0-red.svg" alt="version" />
+  <img src="https://img.shields.io/badge/Version-1.0.1-red.svg" alt="version" />
   <img src="https://img.shields.io/badge/TypeScript-5.8.3-blue" alt="typescript" />
 </p>
 

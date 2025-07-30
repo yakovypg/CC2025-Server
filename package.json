@@ -1,6 +1,6 @@
 {
   "name": "cc2025-server",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "server for the CC2025",
   "main": "index.js",
   "author": "yakovypg",
