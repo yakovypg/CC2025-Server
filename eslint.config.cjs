@@ -113,5 +113,5 @@ module.exports = defineConfig([
       }
     }
   },
-  globalIgnores(["**/dist", "./jest.config.js"])
+  globalIgnores(["**/dist", "scripts/**/*", "./jest.config.js"])
 ]);
