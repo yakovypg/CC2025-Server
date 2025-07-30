@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
     image: cc2025-server:latest
-    container_name: CC2025Server
+    container_name: cc2025-express-server
     restart: on-failure
     env_file:
       - .env.production
@@ -16,31 +16,32 @@ services:
       - mongo-database
       - seq
     volumes:
-      - ./certificates:/app/certificates
+      - ./certificates:/app/certificates:ro
 
   mongo-database:
     image: mongo:6.0
-    container_name: CC2025Database
+    container_name: cc2025-mongo-database
     restart: on-failure
     expose:
       - 27017
-    ports:
-      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGODB_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGODB_PASSWORD}
     volumes:
-      - mongo-data:/data/db
+      - mongo-data:/data/db:rw
       - ./scripts/mongo-init:/docker-entrypoint-initdb.d:ro
 
   seq:
     image: datalust/seq:latest
-    container_name: Seq
+    container_name: cc2025-seq-logging
     restart: on-failure
     ports:
-      - "5341:80"
+      - 5341:80
     environment:
-      - ACCEPT_EULA=Y
-      - SEQ_FIRSTRUN_ADMINPASSWORD=${SEQ_FIRSTRUN_ADMINPASSWORD}
+      ACCEPT_EULA: Y
+      SEQ_FIRSTRUN_ADMINPASSWORD: ${SEQ_FIRSTRUN_ADMINPASSWORD}
     volumes:
-      - seq-data:/data
+      - seq-data:/data:rw
 
 volumes:
   mongo-data:
