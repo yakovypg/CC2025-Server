@@ -3,7 +3,7 @@ import fs from "fs";
 import cors from "cors";
 import express, { Express } from "express";
 
-import { errorHandler } from "../api/middlewares";
+import { cacheHandler, errorHandler } from "../api/middlewares";
 import { cardRoutes, userRoutes } from "../api/routes";
 import {
   HttpsConfig,
@@ -52,8 +52,12 @@ export const loadServerConfig = (): HttpsServerConfig | ServerConfig | null => {
 };
 
 export const configureApp = (app: Express): void => {
+  app.disable("etag");
+
   app.use(express.json());
   app.use(cors());
+
+  app.use(cacheHandler);
 
   app.use("/api/user", userRoutes);
   app.use("/api/card", cardRoutes);
